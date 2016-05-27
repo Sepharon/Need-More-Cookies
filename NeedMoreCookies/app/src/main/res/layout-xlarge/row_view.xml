@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/product"
+        android:layout_height="30dp"
+        android:layout_width="0dp"
+        android:layout_weight="1.5"
+        android:textStyle="bold"
+        android:textSize="19sp"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/quantity"
+        android:layout_height="30dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_height="30dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:textSize="19sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/last_user"
+        android:layout_height="20dp"
+        android:layout_width="80dp"
+        android:textSize="17sp"
+        android:text="@string/Addedby"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/last_user_entry"
+        android:layout_height="20dp"
+        android:layout_width="wrap_content"
+        android:textSize="17sp"
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@+id/last_user"
+        android:visibility="gone"/>
+
+</RelativeLayout>

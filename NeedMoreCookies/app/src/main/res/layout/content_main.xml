@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="sersilinc.needmorecookies.MainActivity"
+    tools:showIn="@layout/app_bar_main">
+    <!-- A RecyclerView with some commonly used attributes -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/adView" />
+    <!--
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="10dp"
+        android:layout_below="@+id/adView"
+        android:visibility="gone">
+    </ListView>
+    -->
+    <TextView
+        android:layout_width="361dp"
+        android:layout_height="515dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/welcome_text"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="40dp"
+        android:layout_alignParentTop="true"
+        android:textStyle="bold"
+        android:visibility="visible"
+        android:textAlignment="center"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/secondView" />
+
+    <LinearLayout
+        android:id="@+id/firstLayout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="vertical"
+        android:layout_alignRight="@+id/secondView"
+        android:layout_alignEnd="@+id/secondView"
+        android:background="#02BBD2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:visibility="gone"
+        android:layout_alignBottom="@+id/thirdLayout">
+
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/private_string"
+            android:id="@+id/private_lists"
+            android:background="@null"
+            android:textColor="#ffffff" />
+        <View android:id="@+id/separator"
+            android:background="#ffffff"
+            android:layout_width = "fill_parent"
+            android:layout_height="2dip"
+            android:layout_centerVertical ="true"
+            android:layout_alignParentTop="true"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/secondView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:background="#02BBD2" />
+
+    <LinearLayout
+        android:id="@+id/thirdLayout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_toRightOf="@+id/secondView"
+        android:orientation="vertical"
+        android:background="#02BBD2"
+        android:visibility="gone">
+
+        <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/public_string"
+            android:id="@+id/public_lists"
+            android:background="@null"
+            android:textColor="#ffffff" />
+        <View android:id="@+id/separator2"
+            android:background="#ffffff"
+            android:layout_width = "fill_parent"
+            android:layout_height="2dip"
+            android:layout_centerVertical ="true"
+            android:layout_alignParentTop="true"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+
+   <ProgressBar
+       android:id="@+id/progressBar"
+       style="?android:attr/progressBarStyleLarge"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_centerHorizontal="true"
+       android:layout_centerVertical="true" >
+   </ProgressBar>
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
+        android:layout_below="@+id/firstLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+    </com.google.android.gms.ads.AdView>
+
+</RelativeLayout>
+

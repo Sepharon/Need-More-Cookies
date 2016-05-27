@@ -1,0 +1,50 @@
+{
+  "project_info": {
+    "project_number": "277969985864",
+    "project_id": "need-more-cookies-d4deb"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:277969985864:android:700513d0d6d13853",
+        "android_client_info": {
+          "package_name": "sersilinc.needmorecookies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "277969985864-i3rbs7p0ir0thasc8tjc26s72r989req.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sersilinc.needmorecookies",
+            "certificate_hash": "70E9A9978157CCA97C589AD13C4D451AAF2099EE"
+          }
+        },
+        {
+          "client_id": "277969985864-e2olh1vhfptfs7vnf8snttpb6sgto6qn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe0kAD6ug5bXON3mr9r8oeqDAhnBBMtOs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2,
+          "test_banner_ad_unit_id": "ca-app-pub-3940256099942544/6300978111",
+          "test_interstitial_ad_unit_id": "ca-app-pub-3940256099942544/1033173712"
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

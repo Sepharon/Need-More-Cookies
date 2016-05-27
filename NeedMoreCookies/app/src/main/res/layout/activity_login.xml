@@ -1,0 +1,78 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#02BBD2"
+    android:orientation="vertical"
+    android:weightSum="4"
+    tools:context=".Login">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/google_icon"
+            android:layout_width="11dp"
+            android:layout_height="11dp"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="2dp" />
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/Sign_Title"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:layout_marginTop="30dp"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Status_SignedOut"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fadeScrollbars="true"
+            android:gravity="center"
+            android:maxLines="5"
+            android:padding="10dp"
+            android:scrollbars="vertical"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="246dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.05" />
+        <ImageView
+            android:layout_width="212dp"
+            android:layout_height="150dp"
+            android:id="@+id/cookie_image"
+            android:src="@drawable/cookie_icon2"
+            android:layout_marginTop="20dp"
+            android:layout_weight="0.18"
+            android:contentDescription="@string/cookie_desciption_login"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

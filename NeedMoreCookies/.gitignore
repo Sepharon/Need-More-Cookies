@@ -1,0 +1,9 @@
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+NeedMoreCookies/app/release_key.jks
+NeedMoreCookies/app/google-services.json

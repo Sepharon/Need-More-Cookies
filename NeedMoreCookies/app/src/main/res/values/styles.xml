@@ -1,0 +1,39 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="colorPrimary">#02BBD2</item>
+        <item name="android:actionMenuTextColor">#02BBD2</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">#02BBD2</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="elevation" tools:targetApi="lollipop">0dp</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:actionMenuTextColor">#02BBD2</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:elevation" tools:targetApi="lollipop">0dp</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:actionMenuTextColor">#02BBD2</item>
+        <item name="elevation" tools:targetApi="lollipop">0dp</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="PreferenceScreen" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:elevation" tools:targetApi="lollipop">0dp</item>
+        <item name="colorPrimary">#02BBD2</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+</resources>

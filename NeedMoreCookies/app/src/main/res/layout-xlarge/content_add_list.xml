@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="sersilinc.needmorecookies.AddList"
+    tools:showIn="@layout/app_bar_addlist"
+    android:background="#ffffff">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_name"
+        android:layout_marginTop="30dp"
+        android:background="@null"
+        android:textColor="#000000"
+        android:hint="@string/hint_list_name"
+        android:textSize="20dp"
+        android:inputType="textCapWords|textCapSentences"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textAlignment="center" />
+
+    <!--<Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Friends"
+        android:id="@+id/add_friends"
+        android:enabled="false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="49dp"/>-->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chose_public_priv"
+        android:id="@+id/textView"
+        android:layout_marginTop="33dp"
+        android:textSize="18dp"
+        android:layout_below="@+id/list_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/private_switch"
+        android:layout_marginTop="44dp"
+        android:checked="false"
+        android:layout_below="@+id/textView" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/public_switch"
+        android:checked="false"
+        android:layout_alignTop="@+id/public_switch_text"
+        android:layout_alignRight="@+id/private_switch"
+        android:layout_alignEnd="@+id/private_switch" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/private_switch"
+        android:id="@+id/private_switch_text"
+        android:layout_alignBottom="@+id/private_switch"
+        android:layout_toRightOf="@+id/private_switch"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/public_switch"
+        android:id="@+id/public_switch_text"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/public_switch" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/private_text"
+        android:id="@+id/private_switch_explanation"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/private_switch_text"
+        android:layout_alignLeft="@+id/private_switch_text"
+        android:layout_alignStart="@+id/private_switch_text" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/public_text"
+        android:id="@+id/public_switch_explanation"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/public_switch_text"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignLeft="@+id/public_switch_text"
+        android:layout_alignStart="@+id/public_switch_text" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/save"
+        android:layout_below="@+id/public_switch_explanation"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:background="@null"
+        android:src="@drawable/ic_done_black_24dp"
+        android:visibility="gone"/>
+
+</RelativeLayout>

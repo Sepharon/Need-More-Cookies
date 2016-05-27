@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/item_list">
+        <item android:id="@+id/edit_item"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="Edit" />
+
+        <item android:id="@+id/delete_item"
+            android:icon="@android:drawable/ic_menu_delete"
+            android:title="Delete" />
+    </group>
+
+</menu>

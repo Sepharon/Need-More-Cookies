@@ -1,0 +1,177 @@
+<resources>
+    <string name="app_name" translatable="false">Need More Cookies!</string>
+    <string name="title_activity_main"><b>"Shopping Lists"</b></string>
+    <string name="hello_world" translatable="false">Hello world!</string>
+    <string name="title_activity_settings"><b>"Settings"</b></string>
+    <string name="Request">Request</string>
+    <string name="Status_SignedOut">"To start using this app, first you need to Log In to your Google account"</string>
+    <string name="Sign_Title">"Welcome to \n Need More Cookies!"</string>
+
+    <string name="public_name">Public</string>
+    <string name="private_name">Private</string>
+    <string name="chose_public_priv">Choose between a private or public list</string>
+    <string name="banner_ad_unit_id_test" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-8635557220130823/6092317993</string>
+    <string name="server_client_id" translatable="false">428986930300-6p5aokuc8rjh4unijhi3a5hcimilo4mt.apps.googleusercontent.com</string>
+    <string name="cookie_desciption_login" translatable="false">cookie_image_login</string>
+    <string name="title_activity_list__contacts"><b>"Contacts List"</b></string>
+
+    <!-- Strings related to Settings -->
+    <string name="pref_header_general" translatable="false">General</string>
+
+    <string-array name="currency_array">
+        <item>€</item>
+        <item>DKK</item>
+        <item>£</item>
+        <item>$</item>
+    </string-array>
+    <string-array name="currency_array_values">
+        <item>€</item>
+        <item>DKK</item>
+        <item>£</item>
+        <item>$</item>
+    </string-array>
+
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">Notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="currency">Currency</string>
+    <string name="currency_description">Select the currency that you whish to use</string>
+    <!--<string name="size_text">Size text</string>-->
+
+    <string name="about">About</string>
+    <string name="contact_us">Contact us</string>
+    <string name="pref_header_help">Help</string>
+    <string name="invite_friends">Invite friends</string>
+    <string name="pref_header_contacts">Contacts</string>
+    <string name="pref_header_logout">Log out</string>
+
+    <string name="logout">Log out</string>
+    <string name="title_activity_maps"><b>"Supermarket's location"</b></string>
+
+    <!--Navigation-->
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="locationSuper">Supermarket\'s Location</string>
+    <string name="home">Home</string>
+    <string name="tools">Settings</string>
+
+    <!--Location-->
+    <string name="location_permission_denied">This application requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
+    <string name="permission_required_toast">Location permission is required for this application.</string>
+    <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
+    <string name="location_enable">Please, turn on the Location</string>
+    <string name="no_connection_maps">Unable to access supermarkets locations. Please switch to Online mode if possible</string>
+
+
+    <string name="title_activity_items"><b>"Products"</b></string>
+    <string name="title_activity_about"><b>"About"</b></string>
+    <string name="title_activity_help"><b>"Help"</b></string>
+    <string name="title_activity_contact_us"><b>"Contact us"</b></string>
+    <string name="contact">If you want to contact us, you can send an email pressing the button below.\nA dialog showing options to send an email will be displayed.</string>
+    <string name="about_us">This application was made for the Bachelor\'s Project by the international students Sergi Carol (student number ID: 201501579) and Sílvia Roses (student number ID: 201501349)
+        \n\nThe purpose of this Android application is to create a shopping list that can be shareable between members of a family, roommates and so on. Each shopping list can be organized into two different groups: Private and Public.
+        Private lists are only accessible by the owner, while Public lists are accessible by the owner and the people who the owner has shared the list with.\nIn order to share a shopping list, it is necessary to provide the Google account
+        of the user who you want to share the shopping list with. This user must have the Android application installed and running. If this is not the case, there is an option to send an email to a friend with the Android application.\n\nTo show nearby stores, the user must have the location enabled on its device. Each place has different markers with different colours: Red for food and bakery, Blue for stores and Green for grocery, supermarkets and shopping mall.\n\nAn offline mode is included
+        in which the user can add and delete shopping lists, and add, delete and modify products. Share shopping lists is not permitted while in offline mode.
+    </string>
+    <string name="title_activity_add_list"><b>"Add Shopping List"</b></string>
+    <string name="title_activity_add_item"><b>"Add Product"</b></string>
+
+    <!--Add item-->
+    <string name="price">Price (optional)</string>
+    <string name="quantity">Quantity</string>
+    <string name="product">Product</string>
+    <string name="add_item_textview">Please, write the name of the product, the quantity and the price if applicable.</string>
+    <string-array name="type_of_products">
+        <item>Meat and Fish</item>
+        <item>Vegetables</item>
+        <item>Cereal</item>
+        <item>Dairy</item>
+        <item>Sweet</item>
+        <item>Others</item>
+    </string-array>
+
+    <!-- Add List -->
+    <string name="hint_list_name">Name of the shopping list here</string>
+    <string name="private_switch">Private Shopping List</string>
+    <string name="public_switch">Public Shopping List</string>
+    <string name="private_text">A private Shopping List can only be accessed by yourself. Choose this option if you are
+    the only one that need to use this list. You can convert a private Shopping List to public any time</string>
+    <string name="public_text">A public Shopping List can be accessed by users that you choose. Choose this option if you
+    wish to share this Shopping List with more people</string>
+    <string name="no_name_toast">You must write a name for your list</string>
+    <string name="list_name_error">A shopping list with this name already exists</string>
+
+    <!-- Login -->
+    <string name="offline_alert">Can not connect to the server</string>
+    <string name="offline_question">Do you want to enter offline mode?</string>
+    <string name="offline_explanation">In offline mode you will not receive updates, nor share lists</string>
+
+    <!--Main Activity-->
+    <string name="add_list_error">An error occurred while adding the Shopping List</string>
+    <string name="change_list_name_error">An error occurred while changing the name of the Shopping List</string>
+    <string name="new_name_item_error">A problem occurred while changing the name of the Item</string>
+    <string name="new_price_item_error">A problem occurred while changing the price of the Item</string>
+    <string name="update_item_error">A problem occurred while updating the product</string>
+    <string name="new_quantity_item_error">A problem occurred while changing the quantity of the Item</string>
+    <string name="delete_item_error">A problem occurred while deleting the Item</string>
+    <string name="add_item_error">A problem occurred while adding the Item</string>
+    <string name="delete_list_error">A problem occurred while deleting the Shopping List</string>
+    <string name="update">Updating Shopping Lists</string>
+    <string name="update_products">Updating products</string>
+    <string name="title_activity_friend" translatable="false">FriendActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="save_button">Save button</string>
+    <string name="change_name_list">Change name of the Shopping List</string>
+    <string name="set_new_name_msg">Enter a new name:</string>
+    <string name="email_not_valid_msg">Please enter a valid e-mail</string>
+    <string name="share_list_msg">Share shopping list</string>
+    <string name="write_email_msg">Write an email:</string>
+    <string name="delete_list_alert">Delete the shopping list?</string>
+    <string name="delete_list_msg">Do you really want to delete the shopping list?</string>
+    <string name="offline_update">Can not connect to the server. Reading from internal DB</string>
+    <string name="offline_update_warning">Shopping lists in offline mode might be outdated!</string>
+    <string name="offline_share">Unable to share Shopping Lists while in offline</string>
+    <string name="go_online_alert">Connection reestablished</string>
+    <string name="go_online_question">Do you want to restart the app in order to go online?</string>
+    <string name="shutting_down">Shutting down</string>
+    <string name="external_delete">A list has been deleted externally</string>
+    <string name="external_delete_item">A product has been deleted externally</string>
+    <string name="external_name_change">The name of a shopping list has been updated</string>
+    <string name="sl_name_change_ok">Shopping List name changed</string>
+    <string name="error_share_sl">The email you have entered does not belong to an existing user</string>
+    <string name="share_sl_ok">Shopping list shared</string>
+    <string name="delete_sl_ok">Shopping list deleted</string>
+    <string name="select_element">Select an element first</string>
+
+    <!-- Share APP -->
+    <string name="offline_mail">Unable to send an invitation while in offline mode</string>
+    <string name="mail_subject">Join me in Need More Cookies!</string>
+    <string name="mail_text">I invite you to try this awesome app! You will be able to write and share shopping lists
+    with your friends! \n Download it here: test.com \n Your friend: </string>
+    <string name="choose_mail">Send mail with…</string>
+    <string name="Addedby">Added by</string>
+    <string name="lastUpdated">Last updated</string>
+    <string name="private_string">Private</string>
+    <string name="public_string">Public</string>
+    <string name="all_string">All</string>
+    <string name="meat_fish">Meat and Fish</string>
+    <string name="vegetables">Vegetables</string>
+    <string name="cereal">Cereals</string>
+    <string name="dairy">Dairy</string>
+    <string name="sweet">Sweet</string>
+    <string name="others">Others</string>
+    <string name="choose_category">Choose category:</string>
+    <string name="product_string">Product</string>
+    <string name="quantity_string">Quantity</string>
+    <string name="price_string">Price</string>
+    <string name="share_nav">Share</string>
+    <string name="welcome_display">"\n\nWelcome back\n "</string>
+
+</resources>

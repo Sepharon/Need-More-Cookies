@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Addedby">Afegit per</string>
+    <string name="Request">Sol·licitud</string>
+    <string name="Sign_Title">"Benvingut a \n Need More Cookies!"</string>
+    <string name="Status_SignedOut">"Per començar a utilitzar aquesta app, primer has d\'iniciar sessió a la teva conta de Google"</string>
+    <string name="about">Sobre nosaltres</string>
+    <string name="about_us">Aquesta aplicació es va fer per al treball de fi de grau pels estudiants internacionals Sergi Carol (número d\'identificació de l\'estudiant: 201501579) i Sílvia Roses (número d\'identificació de l\'estudiant: 201501349) \n \ n La finalitat d\'aquesta aplicació Android és crear una llista de la compra que pot ser compartida entre els membres d\'una família, companys de pis o altres. Cada llista de la compra pot ser organitzada en dos grups diferents: privat i públic. Les llistes privades només són accessibles pel propietari, mentre que les llistes públiques són accessibles pel propietari i les persones amb qui el propietari ha compartit la llista. \n Per tal de compartir una llista de la compra, és necessari saber el compte de Google de l\'usuari amb qui es vol compartir la llista de la compra. Aquest usuari ha de tenir l\'aplicació instal·lada. En cas de què no sigui així, es pot invitar a més gent enviant un correu. \n \n Per mostrar les botigues properes, l\'usuari ha de tenir el GPS habilitat al dispositiu. Cada lloc té diferents marcadors amb diferents colors: Vermell per a l\'alimentació i forns de pa, blau per a les botigues i verd per supermercats i centres comercials \n \n L\'aplicació també inclou un mode de fora de línia en el qual l\'usuari pot afegir i eliminar llistes de la compra i afegir, eliminar i modificar els productes de les llistes de la compra. Compartir llistes de la compra no està permès en el mode de fora de línia..</string>
+    <string name="action_settings">Opcions</string>
+    <string name="add_item_error">Hi ha hagut un problema mentre s\'afegia un producte</string>
+    <string name="add_item_textview">Si us plau, escriu el nom del producte, la quantitat i el preu , si és el cas.</string>
+    <string name="add_list_error">Hi ha hagut un problema mentre s\'afegia una llista de la compra</string>
+    <string name="all_string">Tot</string>
+    <string name="cereal">Cereals</string>
+    <string name="change_list_name_error">Hi ha hagut un problema mentre es canviava el nom d\'una llista de la compra</string>
+    <string name="change_name_list">Canvia el nom d\'una llista de la compra</string>
+    <string name="choose_category">Tria una categoria</string>
+    <string name="choose_mail">Envia un email utilitzant...</string>
+    <string name="chose_public_priv">Tria entre llista de la compra privada o pública</string>
+    <string name="contact">Si vols contactar amb nosaltres, ens pots enviar un email pitjant el botó de sota. \nUn diàleg apareixerà amb les opcions d\'enviar un correu.</string>
+    <string name="contact_us">Contacta amb nosaltres</string>
+    <string name="currency">Moneda</string>
+    <string name="currency_description">Selecciona la monda que vols fer servir.</string>
+    <string name="dairy">Làctics</string>
+    <string name="delete_item_error">Hi ha hagut un problema mentre s\'esborrava el producte.</string>
+    <string name="delete_list_alert">Borrar la llista de la compra?</string>
+    <string name="delete_list_error">Hi ha hagut un problema mentre s\'eborrava la llista de la compra.</string>
+    <string name="delete_list_msg">Estàs segur que vols eliminar la llista de la compra?</string>
+    <string name="delete_sl_ok">Llista de la compra eliminada</string>
+    <string name="email_not_valid_msg">Si us plau, escriu un correu valid.</string>
+    <string name="error_share_sl">El email que has escrit no correspon a cap usuari.</string>
+    <string name="external_delete">Una llista de la compra ha sigut eliminada externament.</string>
+    <string name="external_delete_item">Un producte ha sigut eliminat externament.</string>
+    <string name="external_name_change">El nom de una llista de la compra ha sigut actualitzat.</string>
+    <string name="go_online_question">Vols reiniciar l\'app per anar al mode en línia? </string>
+    <string name="go_online_alert">Connexió restablerta.</string>
+    <string name="hint_list_name">Nom de la llista de la compra aquí</string>
+    <string name="home">Inici</string>
+    <string name="invite_friends">Convidar amics</string>
+    <string name="lastUpdated">Últim cop actualitzat</string>
+    <string name="list_name_error">Una llista de la compra amb aquest nom ja existeix</string>
+    <string name="locationSuper">Localització de supermercats</string>
+    <string name="location_enable">Si us plau, activeu la Localització</string>
+    <string name="location_permission_denied">Aquesta aplicació requereix permís per activar la localització</string>
+    <string name="logout">Tancar sessió</string>
+    <string name="mail_subject">Uneix-te a Need More Cookies!</string>
+    <string name="mail_text">Et convido</string>
+    <string name="meat_fish">Carn i peix</string>
+    <string name="new_name_item_error">Hi ha hagut un problema al canviar el nom del producte.</string>
+    <string name="new_price_item_error">Hi ha hagut un problema al canviar el preu del producte.</string>
+    <string name="new_quantity_item_error">Hi ha hagut un problema al canviar la quantitat del producte.</string>
+    <string name="no_connection_maps">No es possible accedir a la localització dels supermercats. Canvia el mode en línia si és possible.</string>
+    <string name="no_name_toast">Tens que escriure un nom per la llista de la compra</string>
+    <string name="offline_alert">No es pot establir connexió amb el servidor</string>
+    <string name="offline_explanation">En el mode sense línia no es poden rebre actualitzacións ni compartir llistes de la compra.</string>
+    <string name="offline_mail">No es poden enviar invitacions en mode sense línia.</string>
+    <string name="offline_question">Vols entrar en mode sense línia?</string>
+    <string name="offline_share">No es poden compartir llistes de la compra en mode sense línia.</string>
+    <string name="offline_update">No s\'ha pogut connectar amb el servidor. Llegit de la base de dades interna.</string>
+    <string name="offline_update_warning">Les llistes de la compra en mode sense linía poden estar antiquades.</string>
+    <string name="others">Altres</string>
+    <string name="permission_rationale_location">Acces als serveis de localització es necessari per utilitzar la meva localització.</string>
+    <string name="permission_required_toast">Permisos de localització són necessaris per aquesta aplicació</string>
+    <string name="pref_header_contacts">Contactes</string>
+    <string name="pref_header_help">Ajuda</string>
+    <string name="pref_header_logout">Tencar sessió</string>
+    <string name="pref_header_notifications">Notificacions</string>
+    <string name="pref_ringtone_silent">Silenci</string>
+    <string name="pref_title_new_message_notifications">Notificacions</string>
+    <string name="pref_title_ringtone">To</string>
+    <string name="pref_title_vibrate">Vibració</string>
+    <string name="price">Preu (opcional)</string>
+    <string name="price_string">Preu</string>
+    <string name="private_name">Privada</string>
+    <string name="private_string">Privada</string>
+    <string name="private_switch">Llista de la compra privada</string>
+    <string name="private_text">Una llista de la compra privada nomes pot ser accedida per tu mateix. Escull aquesta opció si ets l\'únic que necessita utilitzar aquista llista. Pots convertir una llista privada a pública en cualsevol moment.</string>
+    <string name="product">Producte</string>
+    <string name="product_string">Producte</string>
+    <string name="public_name">Pública</string>
+    <string name="public_string">Pública</string>
+    <string name="public_switch">Llista de la compra Pública</string>
+    <string name="public_text">Una llista de la compra pública pot ser accedida per els usuaris que tu triïs. Escull aquesta opció si desitjes compartir aquesta llista de la compra amb mes gent. </string>
+    <string name="quantity">Quantitat</string>
+    <string name="quantity_string">Quantitat</string>
+    <string name="save_button">Botó de guardar</string>
+    <string name="set_new_name_msg">Escriu un nom:</string>
+    <string name="share_list_msg">Comparteix la llista de la compra</string>
+    <string name="share_nav">Compartir</string>
+    <string name="shutting_down">Apagant</string>
+    <string name="share_sl_ok">Llista de la compra compartida.</string>
+    <string name="sl_name_change_ok">Nom de la llista de la compra canviat.</string>
+    <string name="sweet">Dolç</string>
+    <string name="title_activity_about"><b>"Sobre nosaltres"</b></string>
+    <string name="title_activity_add_item"><b>"Afegir producte"</b></string>
+    <string name="title_activity_add_list"><b>"Afegir llista de la compra"</b></string>
+    <string name="title_activity_contact_us"><b>"Contacta amb nosaltres"</b></string>
+    <string name="title_activity_help"><b>"Ajuda"</b></string>
+    <string name="title_activity_items"><b>"Productes"</b></string>
+    <string name="title_activity_list__contacts"><b>"Llista de contactes"</b></string>
+    <string name="title_activity_main"><b>"Llistes de la compra</b></string>
+    <string name="title_activity_maps"><b>"Localització de supermercats"</b></string>
+    <string name="title_activity_settings"><b>"Opcions"</b></string>
+    <string name="tools">Opcions</string>
+    <string name="update">Actualitzant llistes de la compra</string>
+    <string name="update_item_error">Hi ha hagut un problema mentre s\'actualitzava un producte.</string>
+    <string name="update_products">Actualitzant productes</string>
+    <string name="vegetables">Verdures</string>
+    <string name="welcome_display">"\n\nBenvigut de nou!\n"</string>
+    <string name="write_email_msg">Escriu un email:</string>
+
+    <string-array name="currency_array">
+        <item>€</item>
+        <item>DKK</item>
+        <item>£</item>
+        <item>$</item>
+    </string-array>
+    <string-array name="currency_array_values">
+        <item>€</item>
+        <item>DKK</item>
+        <item>£</item>
+        <item>$</item>
+    </string-array>
+
+    <string-array name="type_of_products">
+        <item>Carne y pescado</item>
+        <item>Hortalizas</item>
+        <item>Cereales</item>
+        <item>Lácteos</item>
+        <item>Dulces</item>
+        <item>Otros</item>
+    </string-array>
+    <string name="select_element">Selecciona un element primer</string>
+</resources>

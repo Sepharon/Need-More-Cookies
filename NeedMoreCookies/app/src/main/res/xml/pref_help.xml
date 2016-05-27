@@ -1,0 +1,16 @@
+<PreferenceScreen  xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- opens a subscreen of settings -->
+    <PreferenceScreen
+        android:key="about"
+        android:title="@string/about"
+        android:persistent="false">
+        <!--<intent android:action=""></intent>-->
+    </PreferenceScreen>
+    <!-- opens a subscreen of settings -->
+    <PreferenceScreen
+        android:key="contact"
+        android:title="@string/contact_us"
+        android:persistent="false">
+        <!--<intent android:action=""></intent>-->
+    </PreferenceScreen>
+</PreferenceScreen>

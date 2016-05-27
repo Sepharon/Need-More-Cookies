@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Addedby">Añadido por</string>
+    <string name="Request">Solicitud</string>
+    <string name="Sign_Title">"Bienvenido a \n Need More Cookies!"</string>
+    <string name="Status_SignedOut">"Para empezar a usar ésta app, primero necesitas iniciar sesión en tu cuenta de Google"</string>
+    <string name="about">Acerca de</string>
+    <string name="about_us"><![CDATA[Esta aplicación se hizo para el Proyecto de final de grado por los estudiantes internacionales Sergi Carol (número de identificación del estudiante: 201501579) y rosas Silvia (número de identificación del estudiante: 201501349) \n\nLa finalidad de esta aplicación Android es crear listas de compra que pueden ser compartidas entre los miembros de una familia, compañeros de piso y demás. Cada lista de la compra puede ser organizada en dos grupos diferentes: privado y público. Las listas privadas sólo son accesibles por el propietario, mientras que las listas públicas son accesibles por el propietario y las personas que el propietario ha compartido la lista.\nPara compartir una lista de la compra, es necesario tener la cuenta de Google del usuario que desea compartir la lista de compra. Este usuario debe tener la aplicación Android instalada y en ejecución. Si este no es el caso, hay una opción para enviar un correo electrónico a un amigo con la aplicación Android.\n\nPara mostrar las tiendas cercanas, el usuario debe tener la localización habilitada en su dispositivo. Cada lugar tiene diferentes marcadores con diferentes colores: Rojo para la alimentación y panadería, azul para las tiendas y verde para comestibles, supermercados y centros comerciales.\nHay un modo offline en el que el usuario puede añadir y eliminar listas de la compra, y añadir, eliminar y modificar los productos. Compartir listas de compras no está permitido en el modo offline. ]]></string>
+    <string name="action_settings">Opciones</string>
+    <string name="add_item_error">Un problema ha ocurrido al añadir el producto</string>
+    <string name="add_item_textview">Porfavor, escribe el nombre del producto, la cantidad y el precio, si se da el caso.</string>
+    <string name="add_list_error">Un error ha occurido al añadir la lista de la compra</string>
+    <string name="all_string">Todo</string>
+    <string name="cereal">Cereales</string>
+    <string name="change_list_name_error">Un error ha ocurrido al cambiar el nombre de la lista de la compra</string>
+    <string name="change_name_list">Cambiar el nombre de la lista de la compra</string>
+    <string name="choose_category">Escoge categoria:</string>
+    <string name="choose_mail">Enviar email usando...</string>
+    <string name="chose_public_priv">Escoge entre una lista de la compra privada o publica</string>
+    <string name="contact">Si quieres contactar con nosotros, puedes enviar un email accionando el botón de abajo.\nUn diálogo aparecerá con opciones para enviar un email</string>
+    <string name="contact_us">Contacto</string>
+    <string name="currency">Moneda</string>
+    <string name="currency_description">Escoge la moneda que deseas</string>
+    <string name="dairy">Lácteos</string>
+    <string name="delete_item_error">Un problema ha ocurrido al eliminar el producto</string>
+    <string name="delete_list_alert">¿Eliminar lista de la compra?</string>
+    <string name="delete_list_error">Un problema ha ocurrido al eliminar la lista de la compra</string>
+    <string name="delete_list_msg">Estás seguro de que quieres eliminar la lista de la compra?</string>
+    <string name="delete_sl_ok">Lista de la compra eliminada</string>
+    <string name="email_not_valid_msg">Porfavor, escribe un email válido</string>
+    <string name="error_share_sl">El email que has introducido no pertenece a ningún usuario</string>
+    <string name="external_delete">Una lista de la compra se ha eliminada externamente</string>
+    <string name="external_delete_item">Un producto se ha eliminado externamente</string>
+    <string name="external_name_change">El nombre de la lista de la compra ha sido actualizado</string>
+    <string name="go_online_alert">Conexión reestablecida</string>
+    <string name="go_online_question">Quieres reinciar la app para ir en modo en línea?</string>
+    <string name="hint_list_name">Nombre de la lista de la compra</string>
+    <string name="home">Inicio</string>
+    <string name="invite_friends">Invitar amigos</string>
+    <string name="lastUpdated">Última vez actualizado</string>
+    <string name="list_name_error">Una lista de la compra con éste nombre ya existe</string>
+    <string name="locationSuper">Localización de víveres</string>
+    <string name="location_enable">Porfavor, habilita la Localización</string>
+    <string name="location_permission_denied">Ésta aplicación requiere permisos para habilitar la localización. Porfavor, prueba otra vez y da permisos para usar la localización.</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="mail_subject">Únete en Need More Cookies!</string>
+    <string name="mail_text">Te invito a usar ésta increíble aplicación! Podras crear y compartir lista de la compra.</string>
+    <string name="meat_fish">Carne y pescado</string>
+    <string name="new_name_item_error">Un problema ha ocurrido al cambiar el nombre del producto</string>
+    <string name="new_price_item_error">Un problema ha ocurrido al cambiar el precio del producto</string>
+    <string name="new_quantity_item_error">Un problema ha ocurrido al cambiar la cantidad del producto</string>
+    <string name="no_connection_maps">No ha sido posible acceder a la localización de víveres. Porfavor, cambia al modo en línea.</string>
+    <string name="no_name_toast">Debes escribir un nombre a la lista de la compra</string>
+    <string name="offline_alert">No se puede conectar con el servidor</string>
+    <string name="offline_explanation">En modo offline, no podras recebir actualizaciones ni compartir listas de la compra</string>
+    <string name="offline_mail">No ha sido posible enviar una invitación en modo offline</string>
+    <string name="offline_question">¿Quiéres entrar en modo offline?</string>
+    <string name="offline_share">No es posible compartir una lista de la compra en modo offline</string>
+    <string name="offline_update">No se puede conectar con el servidor. Leyendo de la base de datos interna</string>
+    <string name="offline_update_warning">Las listas de la compra en modo offline pueden estar anticuadas!</string>
+    <string name="others">Otros</string>
+    <string name="permission_rationale_location">Acceso al servicio de localización es necesario para activar Mi Localización, el cual muestra tu posición actual</string>
+    <string name="permission_required_toast">Permisos de localización son necesarios</string>
+    <string name="pref_header_contacts">Contactos</string>
+    <string name="pref_header_help">Ayuda</string>
+    <string name="pref_header_logout">Cerrar sesión</string>
+    <string name="pref_header_notifications">Notificaciones</string>
+    <string name="pref_ringtone_silent">Silencio</string>
+    <string name="pref_title_new_message_notifications">Notificaciones</string>
+    <string name="pref_title_ringtone">Tono</string>
+    <string name="pref_title_vibrate">Vibración</string>
+    <string name="price">Precio (opcional)</string>
+    <string name="price_string">Precio</string>
+    <string name="private_name">Privada</string>
+    <string name="private_string">Privada</string>
+    <string name="private_switch">Lista privada</string>
+    <string name="private_text">Una lista de la compra privada solo puede ser accedida por ti mismo. Escoge ésta opción si tu eres el único que necesita usar ésta lista de la compra. Puedes cambiarla a pública cuando quieras.</string>
+    <string name="product">Producto</string>
+    <string name="product_string">Producto</string>
+    <string name="public_name">Pública</string>
+    <string name="public_string">Pública</string>
+    <string name="public_switch">Lista pública</string>
+    <string name="public_text">Una lista de la compra pública puede ser accedida por los usuarios que tu escojas. Escoge ésta opción si quieres compartir la lista con otras personas</string>
+    <string name="quantity">Cantidad</string>
+    <string name="quantity_string">Cantidad</string>
+    <string name="save_button">Botón de guardar</string>
+    <string name="set_new_name_msg">Escribe un nombre:</string>
+    <string name="share_list_msg">Compartir lista de la compra</string>
+    <string name="share_sl_ok">Lista de la compra compartida</string>
+    <string name="shutting_down">Apagando</string>
+    <string name="sl_name_change_ok">Nombre de la lista de la compra cambiado</string>
+    <string name="sweet">Dulces</string>
+    <string name="title_activity_about"><b>"Acerca de"</b></string>
+    <string name="title_activity_add_item"><b>"Añadir producto"</b></string>
+    <string name="title_activity_add_list"><b>"Añadir lista de la compra"</b></string>
+    <string name="title_activity_contact_us"><b>"Contacto"</b></string>
+    <string name="title_activity_help"><b>"Ayuda"</b></string>
+    <string name="title_activity_items"><b>"Productos"</b></string>
+    <string name="title_activity_list__contacts"><b>"Lista de contactos"</b></string>
+    <string name="title_activity_main"><b>"Listas de la compra"</b></string>
+    <string name="title_activity_maps"><b>"Localización de víveres"</b></string>
+    <string name="title_activity_settings"><b>"Opciones"</b></string>
+    <string name="tools">Opciones</string>
+    <string name="update">Actualizando listas de la compra</string>
+    <string name="update_item_error">Un problema ha ocurrido al actualizar el producto</string>
+    <string name="update_products">Actualizando productos</string>
+    <string name="vegetables">Hortalizas</string>
+    <string name="write_email_msg">Escribe un email:</string>
+    <string name="share_nav">Compartir</string>
+    <string name="welcome_display">"\n\nBienvenido de nuevo\n "</string>
+
+    <string-array name="currency_array">
+        <item>€</item>
+        <item>DKK</item>
+        <item>£</item>
+        <item>$</item>
+    </string-array>
+    <string-array name="currency_array_values">
+        <item>€</item>
+        <item>DKK</item>
+        <item>£</item>
+        <item>$</item>
+    </string-array>
+
+    <string-array name="type_of_products">
+        <item>Carne y pescado</item>
+        <item>Hortalizas</item>
+        <item>Cereales</item>
+        <item>Lácteos</item>
+        <item>Dulces</item>
+        <item>Otros</item>
+    </string-array>
+    <string name="select_element">Selecciona un elemento primero</string>
+</resources>

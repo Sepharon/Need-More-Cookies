@@ -1,0 +1,26 @@
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- These settings headers are only used on tablets. -->
+
+    <header
+        android:fragment="sersilinc.needmorecookies.SettingsActivity$GeneralPreferenceFragment"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="@string/pref_header_general" />
+
+    <header
+        android:fragment="sersilinc.needmorecookies.SettingsActivity$NotificationPreferenceFragment"
+        android:icon="@drawable/ic_menu_notifications"
+        android:title="@string/pref_header_notifications" />
+
+    <header
+        android:fragment="sersilinc.needmorecookies.SettingsActivity$ContactPreferenceFragment"
+        android:icon="@drawable/ic_menu_cc_am"
+        android:title="@string/pref_header_contacts" />
+
+    <header
+        android:fragment="sersilinc.needmorecookies.SettingsActivity$HelpPreferenceFragment"
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="@string/pref_header_help" />
+
+
+</preference-headers>

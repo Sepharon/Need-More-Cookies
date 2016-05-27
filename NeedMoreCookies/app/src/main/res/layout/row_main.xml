@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/shop_list"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"/>
+    <TextView
+        android:id="@+id/last_added_header"
+        android:layout_height="30dp"
+        android:layout_width="90dp"
+        android:textSize="12sp"
+        android:text="@string/lastUpdated"
+        android:layout_below="@+id/shop_list"
+        android:layout_marginLeft="10dp" />
+    <TextView
+        android:id="@+id/last_added"
+        android:layout_height="30dp"
+        android:layout_width="wrap_content"
+        android:textSize="12sp"
+        android:layout_below="@+id/shop_list"
+        android:layout_toRightOf="@+id/last_added_header" />
+
+</RelativeLayout>

@@ -1,54 +1,36 @@
-package sersilinc.needmorecookies;
+package sergicarolbosch.needmorecookies;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 /**
- * This class shows information on how to contact with the developers of the project.
+ * This class shows a textview with information about the Android application.
  */
 
-public class ContactUs extends AppCompatActivity {
+public class About extends AppCompatActivity {
 
     /**
-     * Override onCreate method.
+     * Override onCreate method
      * @param savedInstanceState Saved instance state
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contact_us);
+        setContentView(R.layout.activity_about);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_contact);
-        assert fab != null;
-        //Send email
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent mail_intent = new Intent(Intent.ACTION_SEND);
-                mail_intent.setType("message/rfc822");
-                mail_intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"webmaster@centrethailam.com"});
-                // Body of mail
-                Intent final_intent = Intent.createChooser(mail_intent,"Choose mail client");
-                final_intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                // Start Mail chooser
-                startActivity(final_intent);
-            }
-        });
 
-        //Set portrait orientation for phones and landscape for tablets.
+        //Force to portrait for both phones and tablets
         if (!isXLargeTablet(getApplicationContext())){
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
+
     }
 
     /**
@@ -62,7 +44,7 @@ public class ContactUs extends AppCompatActivity {
 
     /**
      * Override onConfigurationChanged method to configure the orientation of the screen
-     * @param newConfig New configuration
+     * @param newConfig New Configuration
      */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {

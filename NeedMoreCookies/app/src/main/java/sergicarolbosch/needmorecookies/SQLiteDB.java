@@ -1,4 +1,4 @@
-package sersilinc.needmorecookies;
+package sergicarolbosch.needmorecookies;
 
 import android.content.ContentValues;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package sersilinc.needmorecookies;
+package sergicarolbosch.needmorecookies;
 
 /**
  * This class contains information about the user and the current session

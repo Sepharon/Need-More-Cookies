@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sersilinc.needmorecookies;
+package sergicarolbosch.needmorecookies;
 
 import android.app.IntentService;
 import android.content.Intent;

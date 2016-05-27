@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="sersilinc.needmorecookies">
+    package="sergicarolbosch.needmorecookies">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -14,7 +14,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <permission
-        android:name="sersilinc.needmorecookies.permission.MAPS_RECEIVE"
+        android:name="sergicarolbosch.needmorecookies.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
     <uses-permission android:name="sersilinc.needmorecookies.MAPS_RECEIVE" />
 
@@ -25,7 +25,7 @@
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <permission android:name="sersilinc.needmorecookies.permission.C2D_MESSAGE"
+    <permission android:name="sergicarolbosch.needmorecookies.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
     <uses-permission android:name="sersilinc.needmorecookies.permission.C2D_MESSAGE" />
     <!-- [END gcm_permission] -->
@@ -41,7 +41,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Login"
+            android:name="sergicarolbosch.needmorecookies.Login"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -52,7 +52,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="sergicarolbosch.needmorecookies.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -61,15 +61,15 @@
         </activity>
 
         <service
-            android:name=".Update_Server"
+            android:name="sergicarolbosch.needmorecookies.Update_Server"
             android:enabled="true"
             android:exported="true" />
         <service
-            android:name=".Update_Android"
+            android:name="sergicarolbosch.needmorecookies.Update_Android"
             android:enabled="true"
             android:exported="true"/>
         <activity
-            android:name=".SettingsActivity"
+            android:name="sergicarolbosch.needmorecookies.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:theme="@style/PreferenceScreen" />
         <!--
@@ -88,11 +88,11 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name="sergicarolbosch.needmorecookies.MapsActivity"
             android:label="@string/title_activity_maps"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Items"
+            android:name="sergicarolbosch.needmorecookies.Items"
             android:label="@string/title_activity_items"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -100,20 +100,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".About"
+            android:name="sergicarolbosch.needmorecookies.About"
             android:label="@string/title_activity_about"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ContactUs"
+            android:name="sergicarolbosch.needmorecookies.ContactUs"
             android:label="@string/title_activity_contact_us"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AddList"
+            android:name="sergicarolbosch.needmorecookies.AddList"
             android:windowSoftInputMode="adjustPan"
             android:label="@string/title_activity_add_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AddItem"
+            android:name="sergicarolbosch.needmorecookies.AddItem"
             android:label="@string/title_activity_add_item"
             android:windowSoftInputMode="adjustPan"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -132,7 +132,7 @@
 
         <!-- [START gcm_listener] -->
         <service
-            android:name=".MyGcmListenerService"
+            android:name="sergicarolbosch.needmorecookies.MyGcmListenerService"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -141,7 +141,7 @@
         <!-- [END gcm_listener] -->
         <!-- [START instanceId_listener] -->
         <service
-            android:name=".MyInstanceIDListenerService"
+            android:name="sergicarolbosch.needmorecookies.MyInstanceIDListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID"/>
@@ -149,7 +149,7 @@
         </service>
         <!-- [END instanceId_listener] -->
         <service
-            android:name=".RegistrationIntentService"
+            android:name="sergicarolbosch.needmorecookies.RegistrationIntentService"
             android:exported="false">
         </service>
 

@@ -1,4 +1,4 @@
-package sersilinc.needmorecookies;
+package sergicarolbosch.needmorecookies;
 
 import android.content.Context;
 import android.database.Cursor;

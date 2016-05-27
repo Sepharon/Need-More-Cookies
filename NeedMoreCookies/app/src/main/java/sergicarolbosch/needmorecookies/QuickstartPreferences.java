@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sersilinc.needmorecookies;
+package sergicarolbosch.needmorecookies;
 
 /**
  * This class stores some Strings.

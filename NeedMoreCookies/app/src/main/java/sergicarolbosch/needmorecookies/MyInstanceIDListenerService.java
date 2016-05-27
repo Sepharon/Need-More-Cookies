@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sersilinc.needmorecookies;
+package sergicarolbosch.needmorecookies;
 
 import android.content.Intent;
 import com.google.android.gms.iid.InstanceIDListenerService;

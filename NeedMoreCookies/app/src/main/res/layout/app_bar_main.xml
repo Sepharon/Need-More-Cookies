@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="sersilinc.needmorecookies.MainActivity"
+    tools:context="sergicarolbosch.needmorecookies.MainActivity"
     android:elevation="0dp">
 
     <android.support.design.widget.AppBarLayout

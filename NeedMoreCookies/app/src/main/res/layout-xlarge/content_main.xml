@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="sersilinc.needmorecookies.MainActivity"
+    tools:context="sergicarolbosch.needmorecookies.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
     <ListView

@@ -1,4 +1,4 @@
-package sersilinc.needmorecookies;
+package sergicarolbosch.needmorecookies;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,9 +27,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This class has two modes: one is to add products to a concrete list and another is to edit an existing product.

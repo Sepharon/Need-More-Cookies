@@ -1,4 +1,4 @@
-package sersilinc.needmorecookies;
+package sergicarolbosch.needmorecookies;
 
 //EXTRACTED FROM: https://github.com/googlemaps/android-samples/tree/master/ApiDemos/app/src/main/java/com/example/mapdemo
 

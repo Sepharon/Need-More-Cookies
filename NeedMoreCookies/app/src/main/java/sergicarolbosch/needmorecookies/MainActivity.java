@@ -258,10 +258,10 @@ public class MainActivity extends AppCompatActivity
 
         adapter.setOnItemClickListener(new MyRecyclerAdapter.ClickListener() {
             @Override
-            public void onItemClick(int position, View v, int is_fav_checked) {
-                Shopping_List clicked_shopping_list = shopping_list.get(position);
+            public void onItemClick(Shopping_List clicked_shopping_list, View v, int is_fav_checked) {
+                print_sl();
                 String shopping_list_code = clicked_shopping_list.getShopping_List_Code();
-                String shopping_list_type = String.valueOf(shopping_list.get(position).is_Private() ? 1 : 0);
+                String shopping_list_type = String.valueOf(clicked_shopping_list.is_Private() ? 1 : 0);
                 Log.v(TAG,"Fav value: " + db.read_shopping_list(6,shopping_list_code));
                 switch (is_fav_checked){
                     // Fav icon not changed
@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity
                             startActivity(in);
                         }
                         else{
-                            selected_shopping_list = position;
+                            selected_shopping_list = shopping_list.indexOf(clicked_shopping_list);
                             Message msg = Message.obtain(null, Update_Android.MSG_GET_DATA);
                             Bundle bundle = new Bundle();
                             bundle.putString("request", "one_list");
@@ -291,12 +291,16 @@ public class MainActivity extends AppCompatActivity
                     // Fav icon changed to false
                     case 0:
                         Log.v(TAG,"Fav icon set to false");
+                        Log.v(TAG,"Name: " + clicked_shopping_list.getList_Name());
+                        Log.v(TAG,"SL code: " + shopping_list_code);
                         clicked_shopping_list.setFavourite(false);
                         db.update_favourite_value(false,shopping_list_code);
                         break;
                     // Fav icon changed to true
                     case 1:
                         Log.v(TAG,"Fav icon set to true");
+                        Log.v(TAG,"Name: " + clicked_shopping_list.getList_Name());
+                        Log.v(TAG,"SL code: " + shopping_list_code);
                         db.update_favourite_value(true,shopping_list_code);
                         clicked_shopping_list.setFavourite(true);
                         print_db();
@@ -304,7 +308,8 @@ public class MainActivity extends AppCompatActivity
                 }
                 Log.v(TAG,"Fav value: " + db.read_shopping_list(6,shopping_list_code));
                 // Swap old list with new list (ordered by the fav icons)
-                reload_ui(is_private_selected);
+                read_from_internal_DB();
+                inflate_UI(is_private_selected);
             }
 
             @Override
@@ -316,10 +321,11 @@ public class MainActivity extends AppCompatActivity
                     v.setBackgroundColor(Color.WHITE);
                     selected_shopping_list = -1;
                 }
-                else
+                else {
                     v.setBackgroundColor(Color.CYAN);
-                selected_shopping_list = position;
-                previous_selected_view = v;
+                    selected_shopping_list = position;
+                    previous_selected_view = v;
+                }
             }
         });
 
@@ -665,16 +671,18 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ColorDrawable bg_color = (ColorDrawable) previous_selected_view.getBackground();
         assert drawer != null;
+        if (previous_selected_view != null) {
+            ColorDrawable bg_color = (ColorDrawable) previous_selected_view.getBackground();
+            if (bg_color.getColor() == Color.CYAN) {
+                previous_selected_view.setBackgroundColor(Color.WHITE);
+                selected_shopping_list = -1;
+            }
+        }
         // If the navigation drawer is open, close it
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        else if (drawer.isDrawerOpen(GravityCompat.START))
             drawer.closeDrawer(GravityCompat.START);
-        }
-        else if(bg_color.getColor() == Color.CYAN){
-            previous_selected_view.setBackgroundColor(Color.WHITE);
-            selected_shopping_list = -1;
-        }
+
         else {
             // Else, finish the activity
             finish();
@@ -745,13 +753,13 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         // Supermarkets Item selected
-        if (id == R.id.nav_locations) {
+        /*if (id == R.id.nav_locations) {
             Intent intent = new Intent(MainActivity.this,MapsActivity.class);
             // Start next activity
             startActivity(intent);
-        }
+        }*/
         // Settings Item selected
-        else if (id == R.id.nav_manage) {
+        if (id == R.id.nav_manage) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             // Start next activity
             startActivity(intent);
@@ -1345,6 +1353,7 @@ public class MainActivity extends AppCompatActivity
         List<Shopping_List> private_shopping_lists = new ArrayList<>();
         for (i = 0; i < shopping_list.size(); i++){
             current_list = shopping_list.get(i);
+            Log.v(TAG,"List name: " + current_list.getList_Name());
             Log.v(TAG,"Priv fav: " + current_list.isFavourite());
             if (current_list.is_Private()){
                 if (current_list.isFavourite())
@@ -1353,6 +1362,7 @@ public class MainActivity extends AppCompatActivity
                     private_shopping_lists.add(current_list);
             }
         }
+        print_sl();
         return private_shopping_lists;
     }
 
@@ -1371,6 +1381,11 @@ public class MainActivity extends AppCompatActivity
             }
         }
         return public_shopping_lists;
+    }
+
+    void print_sl(){
+        for (int i = 0; i < shopping_list.size(); i++)
+            Log.v("Shopping","Main, Name: " + shopping_list.get(i).getList_Name() + " Code: " + shopping_list.get(i).getShopping_List_Code());
     }
     // Checks if there is network connection available
     /** http://developer.android.com/training/monitoring-device-state/connectivity-monitoring.html **/

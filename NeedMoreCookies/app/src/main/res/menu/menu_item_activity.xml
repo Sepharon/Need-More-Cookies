@@ -7,5 +7,9 @@
         android:icon="@drawable/ic_menu_refresh"
         android:title="Updating products"
         app:showAsAction="ifRoom"/>
+    <item android:id="@+id/edit_item"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="Edit"
+        app:showAsAction="ifRoom"/>
 
 </menu>

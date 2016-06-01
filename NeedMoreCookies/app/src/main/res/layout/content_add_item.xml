@@ -63,7 +63,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/type"
-        android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:layout_below="@+id/category"
         android:layout_marginTop="10dp" />
@@ -73,14 +72,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/save_item"
-        android:layout_below="@+id/type"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/price"
         android:layout_toEndOf="@+id/price"
-        android:layout_marginTop="20dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="20dp"
         android:background="@null"
         android:src="@drawable/ic_done_black_24dp"
-        android:visibility="gone"/>
+        android:visibility="visible"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/type" />
 </RelativeLayout>

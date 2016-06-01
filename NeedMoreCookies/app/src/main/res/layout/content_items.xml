@@ -9,20 +9,15 @@
     tools:context="sergicarolbosch.needmorecookies.Items"
     tools:showIn="@layout/app_bar_items">
 
-    <ListView
-        android:id="@+id/list_header"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_item_recycler_view"
+        android:scrollbars="vertical"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_below="@+id/firstLayout_items">
-
-    </ListView>
-    <ListView
-        android:id="@+id/list_item"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/list_header">
-
-    </ListView>
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/textView5"
+        android:layout_marginTop="5dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -210,5 +205,34 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" >
     </ProgressBar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Product"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/firstLayout_items"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Quantity"
+        android:id="@+id/textView6"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Price"
+        android:id="@+id/textView7"
+        android:layout_below="@+id/firstLayout_items"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp" />
 
 </RelativeLayout>

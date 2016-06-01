@@ -131,4 +131,6 @@
         <item>Otros</item>
     </string-array>
     <string name="select_element">Selecciona un element primer</string>
+    <string name="last_mod_by">Última modificació per: %1s</string>
+    <string name="item_deleted">Producte eliminat</string>
 </resources>

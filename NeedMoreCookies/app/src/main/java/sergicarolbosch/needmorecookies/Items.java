@@ -11,6 +11,10 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -27,7 +31,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -65,6 +72,8 @@ public class Items extends AppCompatActivity
     //GoogleApiClient
     private GoogleApiClient mGoogleApiClient;
 
+    // Item class
+    private List<Item> item = new ArrayList<>();
 
     //UI elements
     private Button all_items;
@@ -81,8 +90,9 @@ public class Items extends AppCompatActivity
     private View separator5;
     private View separator6;
     private View separator7;
-
+    private RecyclerView mRecyclerView;
     private ProgressBar loading;
+    private View previous_selected_view;
 
     private CountDownTimer timer;
     private CountDownTimer timer2;
@@ -90,28 +100,9 @@ public class Items extends AppCompatActivity
     /**
      * [START ListView]
      **/
-    //Header
-    private ListViewAdapters adapter_header;
-    private ArrayList<HashMap<String, String>> l_header = new ArrayList<>();
-    //Content
-    private ListView listview_items;
-    // Lists
-    private ArrayList<HashMap<String, String>> all_items_l = new ArrayList<>();
-    private ArrayList<HashMap<String, String>> meat_items_l = new ArrayList<>();
-    private ArrayList<HashMap<String, String>> vegetables_items_l = new ArrayList<>();
-    private ArrayList<HashMap<String, String>> cereals_items_l = new ArrayList<>();
-    private ArrayList<HashMap<String, String>> dairy_items_l = new ArrayList<>();
-    private ArrayList<HashMap<String, String>> sweet_items_l = new ArrayList<>();
-    private ArrayList<HashMap<String, String>> others_items_l = new ArrayList<>();
+    //Heade<String, String>> l_header = new ArrayList<>();
 
-    // Adapter
-    private ListViewAdapters adapter;
-
-    //Columns
-    private static final String FIRST_COLUMN = "First";
-    private static final String SECOND_COLUMN = "Second";
-    private static final String THIRD_COLUMN = "Third";
-    private static final String FOURTH_COLUMN="Fourth";
+    private ItemRecyclerAdapter item_adapter;
 
     //Temporal HashMap to write to the columns
     private HashMap<String, String> temp;
@@ -140,6 +131,7 @@ public class Items extends AppCompatActivity
     private String code;
     private String list;
     private String list_type;
+    private int selected_item = -1;
     private int current_tab = 1;
 
     //Selected Item
@@ -178,8 +170,7 @@ public class Items extends AppCompatActivity
         separator5 = findViewById(R.id.separator5_items);
         separator6 = findViewById(R.id.separator6_items);
         separator7 = findViewById(R.id.separator7_items);
-
-        listview_items = (ListView) findViewById(R.id.list_item);
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_item_recycler_view);
 
         ListView listview_header = (ListView) findViewById(R.id.list_header);
         /**[END UI elements]**/
@@ -190,18 +181,21 @@ public class Items extends AppCompatActivity
         this.registerReceiver(receiver_items, filter);
         /**[END Intent-filter for receiving Broadcast]**/
 
-        /**[START List View]**/
-        //Custom adapter
-        adapter_header = new ListViewAdapters(this, l_header, "Header", "1");
-        listview_header.setAdapter(adapter_header);
-        adapter = new ListViewAdapters(this, all_items_l, "Content", list_type);
-        listview_items.setAdapter(adapter);
+        /**[START Service binding]**/
+        Intent intent = new Intent(this, Update_Android.class);
+        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+        Intent in = new Intent(this, Update_Server.class);
+        bindService(in, mConnection2, Context.BIND_AUTO_CREATE);
+        /**[END Service binding]**/
 
-        temp = new HashMap<>();
-        temp.put(FIRST_COLUMN, getResources().getString(R.string.product_string));
-        temp.put(SECOND_COLUMN, getResources().getString(R.string.quantity_string));
-        temp.put(THIRD_COLUMN, getResources().getString(R.string.price_string));
-        l_header.add(temp);
+        /**[START List View]**/
+        RecyclerView.LayoutManager mLayoutManager;
+        mRecyclerView.setHasFixedSize(true);
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        item_adapter = new ItemRecyclerAdapter(item);
+        mRecyclerView.setAdapter(item_adapter);
         /**[END List View]**/
 
         /**[START Preferences]**/
@@ -253,9 +247,6 @@ public class Items extends AppCompatActivity
                 main = extras.getString("Main");
                 list = extras.getString("List");
                 list_type = extras.getString("Type");
-                Log.v(TAG,"Main: " + main);
-                Log.v(TAG,"List: " + list);
-                Log.v(TAG,"Type: " + list_type);
                 try {
                     JSONObject rsp = new JSONObject(main);
                     code = rsp.getString("Code");
@@ -281,13 +272,6 @@ public class Items extends AppCompatActivity
             }
         }
         /**[END Get intent extras]**/
-
-        /**[START Service binding]**/
-        Intent intent = new Intent(this, Update_Android.class);
-        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-        Intent in = new Intent(this, Update_Server.class);
-        bindService(in, mConnection2, Context.BIND_AUTO_CREATE);
-        /**[END Service binding]**/
 
         /**[START GoogleApiClient]**/
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -364,6 +348,64 @@ public class Items extends AppCompatActivity
             }
         });
 
+        item_adapter.setOnItemClickListener(new ItemRecyclerAdapter.ClickListener() {
+            @Override
+            public void onItemClick(Item selected_item, View v) {
+
+            }
+
+            @Override
+            public void onItemLongClick(int position, View v) {
+                if (previous_selected_view != null)
+                    previous_selected_view.setBackgroundColor(Color.WHITE);
+
+                if (position == selected_item) {
+                    v.setBackgroundColor(Color.WHITE);
+                    selected_item = -1;
+                }
+                else {
+                    v.setBackgroundColor(Color.CYAN);
+                    selected_item = position;
+                    previous_selected_view = v;
+                }
+            }
+        });
+        ItemTouchHelper.SimpleCallback simpleItemCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+
+                View itemView = viewHolder.itemView;
+
+                Paint p = new Paint();
+                // Red intensity 100
+                p.setARGB(200, 244, 67, 54);
+                c.drawRect((float) itemView.getRight() + dX, (float) itemView.getTop(),
+                        (float) itemView.getRight(), (float) itemView.getBottom(), p);
+
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+
+            @Override
+            public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
+                switch (direction){
+                    case ItemTouchHelper.LEFT:
+                        Log.v(TAG,"Item swiped left");
+                        delete_item(viewHolder.getAdapterPosition());
+                        item.remove(viewHolder.getAdapterPosition());
+                        Log.v(TAG, item.toString());
+                        item_adapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+                        reload_ui(current_tab);
+                        break;
+                }
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemCallback);
+        itemTouchHelper.attachToRecyclerView(mRecyclerView);
         /**[END onClickListeners]**/
 
         //Set portrait for phones and landscape for tablets
@@ -543,19 +585,15 @@ public class Items extends AppCompatActivity
                 }
                 else {
                     Toast.makeText(getBaseContext(), R.string.offline_update, Toast.LENGTH_SHORT).show();
-                    all_items_l.clear();
-                    meat_items_l.clear();
-                    vegetables_items_l.clear();
-                    cereals_items_l.clear();
-                    dairy_items_l.clear();
-                    sweet_items_l.clear();
-                    others_items_l.clear();
-                    read_from_internal_DB();
-                    adapter.notifyDataSetChanged();
                     reload_ui(1);
                 }
                 return true;
-
+            case R.id.edit_item:
+                if (selected_item != -1)
+                    edit_item(selected_item);
+                else
+                    Toast.makeText(getBaseContext(), R.string.select_element, Toast.LENGTH_SHORT).show();
+                return true;
             default:
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
@@ -590,12 +628,19 @@ public class Items extends AppCompatActivity
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout2);
         assert drawer != null;
-        //If the navigation menu is opened, closed it
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        if (previous_selected_view != null) {
+            ColorDrawable bg_color = (ColorDrawable) previous_selected_view.getBackground();
+            if (bg_color.getColor() == Color.CYAN) {
+                previous_selected_view.setBackgroundColor(Color.WHITE);
+                selected_item = -1;
+            }
         }
+        //If the navigation menu is opened, closed it
+        else if (drawer.isDrawerOpen(GravityCompat.START))
+            drawer.closeDrawer(GravityCompat.START);
+        else
+            super.onBackPressed();
+
     }
 
     /**
@@ -608,12 +653,13 @@ public class Items extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_locations) {
+        /*if (id == R.id.nav_locations) {
             Intent intent = new Intent(Items.this, MapsActivity.class);
             // Start next activity
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_home) {
+        } else*/
+        if (id == R.id.nav_home) {
             Intent intent = new Intent(Items.this, MainActivity.class);
             // Start next activity
             startActivity(intent);
@@ -671,6 +717,8 @@ public class Items extends AppCompatActivity
      * @param type Type of products to show
      */
     private void reload_ui(int type) {
+        List<Item> current_items = new ArrayList<>();
+        read_from_internal_DB();
         separator1.setVisibility(View.INVISIBLE);
         separator2.setVisibility(View.INVISIBLE);
         separator3.setVisibility(View.INVISIBLE);
@@ -678,156 +726,74 @@ public class Items extends AppCompatActivity
         separator5.setVisibility(View.INVISIBLE);
         separator6.setVisibility(View.INVISIBLE);
         separator7.setVisibility(View.INVISIBLE);
+        // All
         if (type == 1) {
-            adapter = new ListViewAdapters(this, all_items_l, "Content", list_type);
             separator1.setVisibility(View.VISIBLE);
-
+            current_items = item;
         } else if (type == 2) {
-            adapter = new ListViewAdapters(this, meat_items_l, "Content", list_type);
             separator2.setVisibility(View.VISIBLE);
-
+            current_items = get_items_with_type("Meat and Fish");
         } else if (type == 3) {
-            adapter = new ListViewAdapters(this, vegetables_items_l, "Content", list_type);
             separator3.setVisibility(View.VISIBLE);
-
+            current_items = get_items_with_type("Vegetables");
         } else if (type == 4) {
-            adapter = new ListViewAdapters(this, cereals_items_l, "Content", list_type);
+            current_items = get_items_with_type("Cereal");
             separator4.setVisibility(View.VISIBLE);
-
         } else if (type == 5) {
-            adapter = new ListViewAdapters(this, dairy_items_l, "Content", list_type);
+            current_items = get_items_with_type("Dairy");
             separator5.setVisibility(View.VISIBLE);
-
         } else if (type == 6) {
-            adapter = new ListViewAdapters(this, sweet_items_l, "Content", list_type);
+            current_items = get_items_with_type("Sweet");
             separator6.setVisibility(View.VISIBLE);
-
         } else if (type == 7) {
-            adapter = new ListViewAdapters(this, others_items_l, "Content", list_type);
+            current_items = get_items_with_type("Others");
             separator7.setVisibility(View.VISIBLE);
-
         }
-        //Set adapter
-        listview_items.setAdapter(adapter);
+        current_tab = type;
+        // Unselect previous selected
+        if (previous_selected_view != null)
+            previous_selected_view.setBackgroundColor(Color.WHITE);
+        item_adapter.swap(current_items);
     }
 
     /**
      * Add products to the internal database
      * @param list List of products
      */
+
+    // WTF IS GOING ON HERE
     private void update_ShoppingList(String list) {
+        List<String> c = new ArrayList<>();
         try {
             int i = 0;
             JSONObject json_obj = new JSONObject(list);
             Iterator<String> keys = json_obj.keys();
-            Log.d(TAG, "Deleting all items of one list");
-            print_db();
-            db.delete_all_items_of_one_list(code);
             print_db();
             while (keys.hasNext()) {
                 String type = String.valueOf(keys.next());
-                switch (type) {
-                    case "Meat and Fish":
-                        Log.v(TAG,"Add item meat");
-                        Log.v(TAG,json_obj.toString());
-                        JSONArray products2 = json_obj.getJSONArray(type);
-                        while (i < products2.length()) {
-                            JSONArray rec = products2.getJSONArray(i);
-                            if (db.read_item(0,rec.getString(3)).equals("Error")) {
-                                Log.d(TAG, "Item not found. Adding to DB");
-                                Log.d(TAG, "Product: " + rec.getString(0));
-                                String old_code = db.add_new_item(rec.getString(0), type, rec.getString(1), rec.getString(2), code, rec.getString(4));
-                                db.set_item_flag(rec.getString(3), 0);
-                                db.update_item_itemcode(rec.getString(3), old_code);
-                            }
-                            i++;
-                        }
-                        i = 0;
-                        break;
-                    case "Vegetables":
-                        JSONArray products3 = json_obj.getJSONArray(type);
-                        while (i < products3.length()) {
-                            JSONArray rec = products3.getJSONArray(i);
-                            if (db.read_item(0,rec.getString(3)).equals("Error")) {
-                                Log.d(TAG,"Item not found. Adding to DB");
-                                Log.d(TAG,"Product: " + rec.getString(0));
-                                String old_code = db.add_new_item(rec.getString(0),type,rec.getString(1),rec.getString(2),code,rec.getString(4));
-                                db.set_item_flag(rec.getString(3),0);
-                                db.update_item_itemcode(rec.getString(3),old_code);
-                            }
-                            i++;
-                        }
-                        i = 0;
-                        break;
-                    case "Cereal":
-                        JSONArray products4 = json_obj.getJSONArray(type);
-                        while (i < products4.length()) {
-                            JSONArray rec = products4.getJSONArray(i);
-                            if (db.read_item(0,rec.getString(3)).equals("Error")) {
-                                Log.d(TAG,"Item not found. Adding to DB");
-                                Log.d(TAG,"Product: " + rec.getString(0));
-                                String old_code = db.add_new_item(rec.getString(0),type,rec.getString(1),rec.getString(2),code,rec.getString(4));
-                                db.set_item_flag(rec.getString(3),0);
-                                db.update_item_itemcode(rec.getString(3),old_code);
-                            }
-                            i++;
-                        }
-                        i = 0;
-                        break;
-                    case "Dairy":
-                        JSONArray products5 = json_obj.getJSONArray(type);
-                        while (i < products5.length()) {
-                            JSONArray rec = products5.getJSONArray(i);
-                            if (db.read_item(0,rec.getString(3)).equals("Error")) {
-                                Log.d(TAG,"Item not found. Adding to DB");
-                                Log.d(TAG,"Product: " + rec.getString(0));
-                                String old_code = db.add_new_item(rec.getString(0),type,rec.getString(1),rec.getString(2),code,rec.getString(4));
-                                db.set_item_flag(rec.getString(3),0);
-                                db.update_item_itemcode(rec.getString(3),old_code);
-                            }
-                            i++;
-                        }
-                        i = 0;
-                        break;
-                    case "Sweet":
-                        JSONArray products6 = json_obj.getJSONArray(type);
-                        while (i < products6.length()) {
-                            JSONArray rec = products6.getJSONArray(i);
-                            if (db.read_item(0,rec.getString(3)).equals("Error")) {
-                                Log.d(TAG,"Item not found. Adding to DB");
-                                Log.d(TAG,"Product: " + rec.getString(0));
-                                String old_code = db.add_new_item(rec.getString(0),type,rec.getString(1),rec.getString(2),code,rec.getString(4));
-                                db.set_item_flag(rec.getString(3),0);
-                                db.update_item_itemcode(rec.getString(3),old_code);
-                            }
-                            i++;
-                        }
-                        i = 0;
-                        break;
-                    case "Others":
-                        JSONArray products7 = json_obj.getJSONArray(type);
-                        Log.v(TAG,"others");
-                        while (i < products7.length()) {
-                            JSONArray rec = products7.getJSONArray(i);
-                            Log.v(TAG,"Code: " + rec.getString(3));
-                            Log.v(TAG,"Reading: " + db.read_item(0,rec.getString(3)));
-                            if (db.read_item(0,rec.getString(3)).equals("Error")) {
-                                Log.d(TAG,"Item not found. Adding to DB");
-                                Log.d(TAG,"Product: " + rec.getString(0));
-                                String old_code = db.add_new_item(rec.getString(0),type,rec.getString(1),rec.getString(2),code,rec.getString(4));
-                                db.set_item_flag(rec.getString(3),0);
-                                db.update_item_itemcode(rec.getString(3),old_code);
-                            }
-                            i++;
-                        }
-                        i = 0;
-                        break;
+                JSONArray products2 = json_obj.getJSONArray(type);
+                while (i < products2.length()) {
+                    JSONArray rec = products2.getJSONArray(i);
+                    c.add(rec.getString(3));
+                    if (db.read_item(0, rec.getString(3)).equals("Error")) {
+                        Log.d(TAG, "Item not found. Adding to DB");
+                        Log.d(TAG, "Product: " + rec.getString(0));
+                        String old_code = db.add_new_item(rec.getString(0), type, rec.getString(1), rec.getString(2), code, rec.getString(4));
+                        db.set_item_flag(rec.getString(3), 0);
+                        db.update_item_itemcode(rec.getString(3), old_code);
+                    }
+                    else if (!db.read_item(1,rec.getString(3)).equals(rec.getString(0)) || !db.read_item(3,rec.getString(3)).equals(rec.getString(1)) || !db.read_item(4,rec.getString(3)).equals(rec.getString(2))){
+                        db.update_item_value(rec.getString(0),rec.getString(1),rec.getString(2),rec.getString(3));
+                    }
+                    i++;
                 }
+                i = 0;
             }
         } catch (JSONException e) {
             Log.d(TAG, "Error JSON");
             e.printStackTrace();
         }
+        remove_deleted_SL(c);
         read_from_internal_DB();
         reload_ui(1);
     }
@@ -855,14 +821,6 @@ public class Items extends AppCompatActivity
                 Log.d(TAG, product + quantity + price + type);
 
                 if (!usr_inf.getOffline_mode()) {
-                    adapter.notifyDataSetChanged();
-                    all_items_l.clear();
-                    meat_items_l.clear();
-                    vegetables_items_l.clear();
-                    cereals_items_l.clear();
-                    dairy_items_l.clear();
-                    sweet_items_l.clear();
-                    others_items_l.clear();
                     old_codes = db.add_new_item(product, type, quantity, price, code, usr_inf.getName());
                     Log.v(TAG,"added new item");
                     print_db();
@@ -871,14 +829,6 @@ public class Items extends AppCompatActivity
 
                 if (usr_inf.getOffline_mode()) {
                     old_codes = db.add_new_item(product, type, quantity, price, code, usr_inf.getName());
-                    adapter.notifyDataSetChanged();
-                    all_items_l.clear();
-                    meat_items_l.clear();
-                    vegetables_items_l.clear();
-                    cereals_items_l.clear();
-                    dairy_items_l.clear();
-                    sweet_items_l.clear();
-                    others_items_l.clear();
                     read_from_internal_DB();
                 }
                 reload_ui(1);
@@ -896,42 +846,17 @@ public class Items extends AppCompatActivity
                 String quantity = data.getStringExtra("quantity");
                 String price = data.getStringExtra("price");
                 if (price.equals("")) price = " ";
-
+                String code_item = item.get(selected_item).getItem_Code();
                 String type = data.getStringExtra("type");
                 Log.d(TAG, product + quantity + price + type);
-
-                Object item = adapter.getItem(currentSelection);
-                String Product = ((HashMap) item).get(FIRST_COLUMN).toString();
-                String Quantity = ((HashMap) item).get(SECOND_COLUMN).toString();
-                String Price_currency = ((HashMap) item).get(THIRD_COLUMN).toString();
-                String Price = Price_currency.split(currency)[0];
-                if (Price.equals("-") | Price.equals("")) {
-                    Price = "null";
-                }
-
-                //Get type of product
-                String type_prod = get_Product_Type(adapter.getItem(currentSelection).toString());
-
-                //Get unique code
-                String code_item = db.read_code_items(Product, Quantity, Price, type_prod);
 
                 if (!usr_inf.getOffline_mode())
                     send_request_server("update_item", list_type, code, type, product, price, quantity, code_item);
 
                 if (usr_inf.getOffline_mode()){
-                    db.update_item_value(product,quantity,price,code_item);
-                    db.set_item_flag(code_item,1);
                 }
                 print_db();
                 reload_ui(1);
-                all_items_l.clear();
-                meat_items_l.clear();
-                vegetables_items_l.clear();
-                cereals_items_l.clear();
-                dairy_items_l.clear();
-                sweet_items_l.clear();
-                others_items_l.clear();
-                adapter.notifyDataSetChanged();
                 if (usr_inf.getOffline_mode()) read_from_internal_DB();
             }
         }
@@ -973,85 +898,28 @@ public class Items extends AppCompatActivity
     /**
      * Delete selected item
      */
-    private void delete_item() {
-        final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+    private void delete_item(final int position) {
 
-        alert.setTitle("Delete the product from the shopping list?");
-        alert.setMessage("Do you really want to delete the product?");
-
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                Object item = adapter.getItem(currentSelection);
-                String Product = ((HashMap) item).get(FIRST_COLUMN).toString();
-                String Quantity = ((HashMap) item).get(SECOND_COLUMN).toString();
-                String Price_currency = ((HashMap) item).get(THIRD_COLUMN).toString();
-                String Price = Price_currency.split(currency)[0];
-                if (Price.equals("-")) Price = "null";
-                String type = get_Product_Type(adapter.getItem(currentSelection).toString());
-
-                Log.d(TAG, "DELETE: "+Product+Quantity+Price+type);
-
-                String code_item = db.read_code_items(Product, Quantity, Price, type);
-
-
-                //If we are online, send post request, else add a change type of removal to the product
-                if (!usr_inf.getOffline_mode()) {
-                    send_request_server("delete_item", list_type, code, type, Product, Price, Quantity, code_item);
-                    print_db();
-                    db.delete_item(code_item);
-                }
-                else {
-                    db.update_item_change("delete_item", code_item);
-
-                    all_items_l.clear();
-                    meat_items_l.clear();
-                    vegetables_items_l.clear();
-                    cereals_items_l.clear();
-                    dairy_items_l.clear();
-                    sweet_items_l.clear();
-                    others_items_l.clear();
-                    adapter.notifyDataSetChanged();
-                    read_from_internal_DB();
-                    reload_ui(1);
-                }
-            }
-        });
-
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-            }
-        });
-
-        alert.show();
-    }
-
-    /**
-     * Get the type of the product
-     * @param selection Selection
-     * @return Type
-     */
-    private String get_Product_Type(String selection) {
-        String type = "";
-        for (int i = 0; i < meat_items_l.size(); i++) {
-            if (meat_items_l.get(i).toString().equals(selection)) type = "Meat and Fish";
+        Item current_item = item.get(position);
+        String Product = current_item.getItem_Name();
+        String Quantity = current_item.getItem_Quantity();
+        String Price = current_item.getItem_Price();
+        if (Price.equals("-")) Price = "null";
+        String type = current_item.getItem_Type();
+        Log.d(TAG, "DELETE: "+Product+Quantity+Price+type);
+        String code_item = current_item.getItem_Code();
+        //If we are online, send post request, else add a change type of removal to the product
+        if (!usr_inf.getOffline_mode()) {
+            send_request_server("delete_item", list_type, code, type, Product, Price, Quantity, code_item);
+            print_db();
+            db.delete_item(code_item);
         }
-        for (int i = 0; i < vegetables_items_l.size(); i++) {
-            if (vegetables_items_l.get(i).toString().equals(selection)) type = "Vegetables";
+        else {
+            db.update_item_change("delete_item", code_item);
+            read_from_internal_DB();
+            reload_ui(1);
         }
-        for (int i = 0; i < cereals_items_l.size(); i++) {
-            if (cereals_items_l.get(i).toString().equals(selection)) type = "Cereal";
-        }
-        for (int i = 0; i < dairy_items_l.size(); i++) {
-            if (dairy_items_l.get(i).toString().equals(selection)) type = "Dairy";
-        }
-        for (int i = 0; i < sweet_items_l.size(); i++) {
-            if (sweet_items_l.get(i).toString().equals(selection)) type = "Sweet";
-        }
-        for (int i = 0; i < others_items_l.size(); i++) {
-            if (others_items_l.get(i).toString().equals(selection)) type = "Others";
-        }
-        return type;
-    }
+}
 
     /**
      * Send a essage to the Update_Android service using a Messenger.
@@ -1094,14 +962,6 @@ public class Items extends AppCompatActivity
                     if (update_product.equals("True")) {
                         String list_items = intent.getStringExtra("One_list");
                         Log.v(TAG,"Receiver list: " + list_items);
-                        all_items_l.clear();
-                        meat_items_l.clear();
-                        vegetables_items_l.clear();
-                        cereals_items_l.clear();
-                        dairy_items_l.clear();
-                        sweet_items_l.clear();
-                        others_items_l.clear();
-                        adapter.notifyDataSetChanged();
                         update_ShoppingList(list_items);
                     }
                     break;
@@ -1110,8 +970,6 @@ public class Items extends AppCompatActivity
                         Toast.makeText(Items.this,R.string.add_item_error,Toast.LENGTH_SHORT)
                                 .show();
                     else {
-                        Log.d(TAG, "adding new code: " + main_receiver);
-                        Log.d(TAG, "old_code: " + old_codes);
                         db.update_item_itemcode(main_receiver, old_codes);
                         try {
                             db.delete_item(old_codes);
@@ -1119,14 +977,6 @@ public class Items extends AppCompatActivity
                             e.printStackTrace();
                         }
                         db.set_item_flag(main_receiver, 0);
-                        all_items_l.clear();
-                        meat_items_l.clear();
-                        vegetables_items_l.clear();
-                        cereals_items_l.clear();
-                        dairy_items_l.clear();
-                        sweet_items_l.clear();
-                        others_items_l.clear();
-                        adapter.notifyDataSetChanged();
                         getAll_products();
                         reload_ui(1);
                         Log.d(TAG, "Added new product correctly");
@@ -1137,15 +987,8 @@ public class Items extends AppCompatActivity
                         Toast.makeText(Items.this,R.string.delete_item_error,Toast.LENGTH_SHORT)
                                 .show();
                     else{
-                        all_items_l.clear();
-                        meat_items_l.clear();
-                        vegetables_items_l.clear();
-                        cereals_items_l.clear();
-                        dairy_items_l.clear();
-                        sweet_items_l.clear();
-                        others_items_l.clear();
-                        adapter.notifyDataSetChanged();
                         getAll_products();
+                        Toast.makeText(Items.this,R.string.item_deleted,Toast.LENGTH_LONG).show();
                         Log.d(TAG, "Deleted product correctly");
                     }
                     break;
@@ -1154,15 +997,6 @@ public class Items extends AppCompatActivity
                         Toast.makeText(Items.this,R.string.update_item_error,Toast.LENGTH_SHORT)
                                 .show();
                     else {
-                        adapter.notifyDataSetChanged();
-                        all_items_l.clear();
-                        meat_items_l.clear();
-                        vegetables_items_l.clear();
-                        cereals_items_l.clear();
-                        dairy_items_l.clear();
-                        sweet_items_l.clear();
-                        others_items_l.clear();
-                        adapter.notifyDataSetChanged();
                         getAll_products();
                         Log.d(TAG, "Product updated correctly");
                     }
@@ -1174,15 +1008,13 @@ public class Items extends AppCompatActivity
     /**
      * Edit the product
      */
-    private void edit_item(){
-        Object item = adapter.getItem(currentSelection);
-        String Product = ((HashMap) item).get(FIRST_COLUMN).toString();
-        String Quantity = ((HashMap) item).get(SECOND_COLUMN).toString();
-        String Price_currency = ((HashMap) item).get(THIRD_COLUMN).toString();
-        String Price = Price_currency.split(currency)[0];
+    private void edit_item(int position){
+        Item edit_item = item.get(position);
+        String Product = edit_item.getItem_Name();
+        String Quantity = edit_item.getItem_Quantity();
+        String Price = edit_item.getItem_Price();
         if (Price.equals("-")) Price = null;
-
-        String type = get_Product_Type(adapter.getItem(currentSelection).toString());
+        String type = edit_item.getItem_Type();
         Intent intent = new Intent(Items.this, AddItem.class);
         intent.putExtra("Edit", "True");
         intent.putExtra("Product", Product);
@@ -1235,124 +1067,31 @@ public class Items extends AppCompatActivity
         Log.d(TAG, "Reading from internal DB");
         // Product, Quantity, Price, Type, Last_User, Code_item
         List<String[]> a = db.read_all_items(code);
+        item.clear();
+        String price, addedby;
         if (a != null) {
             for (int i = 0; i < a.size(); i++) {
                 String[] b = a.get(i);
-                temp = new HashMap<>();
-
-                if (b[2].equals("null"))
-                    temp.put(THIRD_COLUMN, "-" + currency);
-                else
-                    temp.put(THIRD_COLUMN, b[2] + currency);
-
-                temp.put(FIRST_COLUMN, b[0]);
-                temp.put(SECOND_COLUMN, b[1]);
-                if (list_type.equals("0")) temp.put(FOURTH_COLUMN, a.get(i)[4]);
-                all_items_l.add(temp);
-
-                switch (b[3]) {
-                    case "Meat and Fish":
-                        temp = new HashMap<>();
-                        if (b[2].equals("null"))
-                            temp.put(THIRD_COLUMN, "-" + currency);
-                        else
-                            temp.put(THIRD_COLUMN, b[2] + currency);
-
-                        temp.put(FIRST_COLUMN, b[0]);
-                        temp.put(SECOND_COLUMN, b[1]);
-
-                        if (list_type.equals("0"))
-                            temp.put(FOURTH_COLUMN, a.get(i)[4]);
-
-                        meat_items_l.add(temp);
-
-
-                        break;
-                    case "Vegetables":
-                        temp = new HashMap<>();
-
-                        if (b[2].equals("null"))
-                            temp.put(THIRD_COLUMN, "-" + currency);
-                        else
-                            temp.put(THIRD_COLUMN, b[2] + currency);
-
-                        temp.put(FIRST_COLUMN, b[0]);
-                        temp.put(SECOND_COLUMN, b[1]);
-
-                        if (list_type.equals("0"))
-                            temp.put(FOURTH_COLUMN, a.get(i)[4]);
-
-                        vegetables_items_l.add(temp);
-
-                        break;
-                    case "Cereal":
-                        temp = new HashMap<>();
-                        if (b[2].equals("null"))
-                            temp.put(THIRD_COLUMN, "-" + currency);
-                        else
-                            temp.put(THIRD_COLUMN, b[2] + currency);
-
-                        temp.put(FIRST_COLUMN, b[0]);
-                        temp.put(SECOND_COLUMN, b[1]);
-
-                        if (list_type.equals("0"))
-                            temp.put(FOURTH_COLUMN, a.get(i)[4]);
-
-                        cereals_items_l.add(temp);
-
-                        break;
-                    case "Dairy":
-                        temp = new HashMap<>();
-                        if (b[2].equals("null"))
-                            temp.put(THIRD_COLUMN, "-" + currency);
-                        else
-                            temp.put(THIRD_COLUMN, b[2] + currency);
-
-                        temp.put(FIRST_COLUMN, b[0]);
-                        temp.put(SECOND_COLUMN, b[1]);
-
-                        if (list_type.equals("0"))
-                            temp.put(FOURTH_COLUMN, a.get(i)[4]);
-
-                        dairy_items_l.add(temp);
-
-
-                        break;
-                    case "Sweet":
-                        temp = new HashMap<>();
-                        if (b[2].equals("null"))
-                            temp.put(THIRD_COLUMN, "-" + currency);
-                        else
-                            temp.put(THIRD_COLUMN, b[2] + currency);
-
-                        temp.put(FIRST_COLUMN, b[0]);
-                        temp.put(SECOND_COLUMN, b[1]);
-
-                        if (list_type.equals("0"))
-                            temp.put(FOURTH_COLUMN, a.get(i)[4]);
-
-                        sweet_items_l.add(temp);
-
-                        break;
-                    case "Others":
-                        temp = new HashMap<>();
-                        if (b[2].equals("null"))
-                            temp.put(THIRD_COLUMN, "-" + currency);
-                        else
-                            temp.put(THIRD_COLUMN, b[2] + currency);
-
-                        temp.put(FIRST_COLUMN, b[0]);
-                        temp.put(SECOND_COLUMN, b[1]);
-
-                        if (list_type.equals("0"))
-                            temp.put(FOURTH_COLUMN, a.get(i)[4]);
-
-                        others_items_l.add(temp);
-
-                        break;
-                }
+                if (b[2].equals("null")) price = "-";
+                else price = b[2];
+                if (list_type.equals("0")) addedby = String.format(getResources().getString(R.string.last_mod_by),b[4]);
+                else addedby = "";
+                item.add(new Item(b[0], b[1], price, addedby, b[3], b[5]));
             }
         }
+        print_items(item);
+    }
+
+    private List<Item> get_items_with_type(String item_type){
+        List<Item> items_with_type = new ArrayList<>();
+        print_items(item);
+        for (int i = 0; i < item.size(); i++){
+            Item current_item = item.get(i);
+            Log.v("Printing","Item type: " + current_item.getItem_Type());
+            if (current_item.getItem_Type().equals(item_type)) items_with_type.add(current_item);
+        }
+        print_items(items_with_type);
+        return items_with_type;
     }
 
     /**
@@ -1401,15 +1140,7 @@ public class Items extends AppCompatActivity
         @Override
         protected void onPreExecute() {
             Log.d(TAG,"STARTING EXECUTION OF APP");
-            all_items_l.clear();
-            meat_items_l.clear();
-            vegetables_items_l.clear();
-            cereals_items_l.clear();
-            dairy_items_l.clear();
-            sweet_items_l.clear();
-            others_items_l.clear();
-            adapter.notifyDataSetChanged();
-            listview_items.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.GONE);
             loading.setVisibility(View.VISIBLE);
         }
         @Override
@@ -1428,8 +1159,8 @@ public class Items extends AppCompatActivity
 
         @Override
         protected void onPostExecute(Void result) {
+            mRecyclerView.setVisibility(View.VISIBLE);
             loading.setVisibility(View.GONE);
-            listview_items.setVisibility(View.VISIBLE);
         }
     }
 
@@ -1442,6 +1173,42 @@ public class Items extends AppCompatActivity
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    void print_items(List<Item> items_to_print){
+        for (int i = 0; i < items_to_print.size(); i++)
+            Log.v("Printing"," Name: " + items_to_print.get(i).getItem_Name());
+    }
+
+    // Removes unused lists.
+    private void remove_deleted_SL(List<String> c){
+        int i;
+        boolean deleted_flag = false;
+        Log.v(TAG,"Removing lists");
+        List<String[]> internal_db_lists;
+        // Codes from the internal DB
+        List<String> internal_codes = new ArrayList<>();
+        // Grab all entries from DB
+        internal_db_lists = db.read_all_items(code);
+        // Add all codes from entries into a list
+        for (i = 0;i < internal_db_lists.size();i++)
+            internal_codes.add(internal_db_lists.get(i)[4]);
+        // If one of the received codes is inside the DB remove it form the list
+        for (i = 0;i < c.size(); i++){
+            // Compare the codes from the internal DB with the ones from the server
+            if (internal_codes.contains(c.get(i))) {
+                // If the code is in the internal DB delete it from the list
+                internal_codes.remove(c.get(i));
+            }
+        }
+        // In case there are still codes in the DB that are not on the server remove them from the DB
+        if (internal_codes.size() > 0){
+            for (i = 0;i < internal_codes.size(); i++){
+                deleted_flag = true;
+                Log.d(TAG,"Removing lists: " + internal_codes.get(i));
+                db.delete_item(internal_codes.get(i));
+            }
+        }
     }
 }
 

@@ -176,12 +176,13 @@ public class AddList extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_locations) {
+        /*if (id == R.id.nav_locations) {
             Intent intent = new Intent(AddList.this,MapsActivity.class);
             // Start next activity
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_manage) {
+        } else*/
+        if (id == R.id.nav_manage) {
             Intent intent = new Intent(AddList.this, SettingsActivity.class);
             // Start next activity
             startActivity(intent);

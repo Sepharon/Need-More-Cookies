@@ -21,7 +21,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     private final String TAG = "Recycler";
     private static List<Shopping_List> sl;
     private static ClickListener clickListener;
-    private static boolean previous_fav_status;
+    private static boolean previous_fav_status = false;
 
     public MyRecyclerAdapter(List<Shopping_List> shopping_lists) {
         sl = new ArrayList<Shopping_List>();
@@ -39,7 +39,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             super(itemView);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
-            titleText = (TextView) itemView.findViewById(R.id.name);
+            titleText = (TextView) itemView.findViewById(R.id.title);
             contentText = (TextView) itemView.findViewById(R.id.hexValue);
             card = (CardView) itemView.findViewById(R.id.card);
             fav_icon = (CheckBox) itemView.findViewById(R.id.star);
@@ -50,15 +50,20 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         public void onClick(View v) {
             // -1 = no change ; 0 = changed to false; 1 = changed to true
             int is_fav_checked = -1;
+
             if (fav_icon.isChecked() != sl.get(getAdapterPosition()).isFavourite()){
-                Log.v("Recycler","Fav icon has changed!");
-                Log.v("Recycler","List name: " + sl.get(getAdapterPosition()).getList_Name());
+                Log.v("Shopping","STARTING FAV");
+                print_sl();
+                Log.v("Shopping","Fav icon has changed!");
+                Log.v("Shopping","SHopping List: " + sl.toString());
+                Log.v("Shopping","List name: " + sl.get(getAdapterPosition()).getList_Name());
                 previous_fav_status = fav_icon.isChecked();
                 sl.get(getAdapterPosition()).setFavourite(fav_icon.isChecked());
                 is_fav_checked = ((fav_icon.isChecked()) ? 1 : 0);
             }
+            Log.v("Shopping","Fav checked value: " + is_fav_checked);
             //sl.get(getAdapterPosition()).setFavourite(fav_icon.isChecked());
-            clickListener.onItemClick(getAdapterPosition(), v, is_fav_checked);
+            clickListener.onItemClick(sl.get(getAdapterPosition()), v, is_fav_checked);
         }
 
         @Override
@@ -66,6 +71,10 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             v.setBackgroundColor(Color.WHITE);
             clickListener.onItemLongClick(getAdapterPosition(), v);
             return false;
+        }
+        void print_sl(){
+            for (int i = 0; i < sl.size(); i++)
+                Log.v("Shopping","Name: " + sl.get(i).getList_Name() + " Code: " + sl.get(i).getShopping_List_Code());
         }
     }
     @Override
@@ -97,7 +106,8 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     }
 
     public interface ClickListener {
-        void onItemClick(int position, View v,int icon_status);
+        // Hacky way, we pass the shopping list object instead of the position
+        void onItemClick(Shopping_List sl, View v,int icon_status);
         void onItemLongClick(int position, View v);
     }
 

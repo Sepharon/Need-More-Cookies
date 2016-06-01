@@ -331,7 +331,6 @@ public class DB_Helper {
         String table_name = DataBase.Items_table_name;
         String query;
         List<String[]> r = new ArrayList<>();
-        Log.d(TAG,"COde: " + code);
         Cursor result;
         query = "SELECT * FROM " + table_name+" WHERE "+DataBase.KEY_CODE_LIST+String.format("='%s'",code);
         result = DataBase.read_multiple_entries(query);

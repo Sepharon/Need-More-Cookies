@@ -13,7 +13,8 @@ public class User_Info {
     private String email;
     // Offline mode
     private boolean offline_mode;
-
+    // Currency
+    private String currency;
     //Instantiate
     private static User_Info user_info = new User_Info();
     public static User_Info getInstance(){
@@ -39,7 +40,7 @@ public class User_Info {
         return email;
     }
     public Boolean getOffline_mode() { return offline_mode;}
-
+    public String getCurrency(){ return currency;}
     // Set values
     public void setName(String name) {
         this.name = name;
@@ -48,5 +49,8 @@ public class User_Info {
         this.email = email;
     }
     public void setOffline_mode(Boolean status) {this.offline_mode = status;}
+    public void setCurrency(String CR) {
+        this.currency = CR;
+    }
 
 }

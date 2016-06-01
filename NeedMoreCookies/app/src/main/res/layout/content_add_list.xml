@@ -50,11 +50,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/private_switch"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="23dp"
             android:checked="false"
             android:layout_below="@+id/textView"
-            android:layout_toLeftOf="@+id/public_switch_text"
-            android:layout_toStartOf="@+id/public_switch_text" />
+            android:layout_alignEnd="@+id/textView" />
 
         <Switch
             android:layout_width="wrap_content"
@@ -63,8 +62,7 @@
             android:layout_marginTop="25dp"
             android:checked="false"
             android:layout_below="@+id/private_switch_explanation"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignStart="@+id/private_switch" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -73,8 +71,7 @@
             android:text="@string/private_switch"
             android:id="@+id/private_switch_text"
             android:layout_alignTop="@+id/private_switch"
-            android:layout_alignLeft="@+id/public_switch_text"
-            android:layout_alignStart="@+id/public_switch_text" />
+            android:layout_toEndOf="@+id/save" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -82,10 +79,9 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/public_switch"
             android:id="@+id/public_switch_text"
+            android:layout_marginLeft="10dp"
             android:layout_alignTop="@+id/public_switch"
-            android:layout_toRightOf="@+id/public_switch"
-            android:layout_toEndOf="@+id/public_switch"
-            android:layout_marginLeft="10dp" />
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -93,9 +89,7 @@
             android:text="@string/private_text"
             android:id="@+id/private_switch_explanation"
             android:layout_below="@+id/private_switch"
-            android:layout_marginTop="5dp"
-            android:layout_toRightOf="@+id/private_switch"
-            android:layout_toEndOf="@+id/private_switch" />
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"

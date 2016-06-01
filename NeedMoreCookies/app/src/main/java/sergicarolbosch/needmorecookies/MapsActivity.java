@@ -204,11 +204,12 @@ public class MapsActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_locations) {
+        /*if (id == R.id.nav_locations) {
             Intent intent = new Intent(MapsActivity.this, MapsActivity.class);
             // Start next activity
             startActivity(intent);
-        } else if (id == R.id.nav_home) {
+        } else*/
+        if (id == R.id.nav_home) {
             Intent intent = new Intent(MapsActivity.this, MainActivity.class);
             // Start next activity
             startActivity(intent);

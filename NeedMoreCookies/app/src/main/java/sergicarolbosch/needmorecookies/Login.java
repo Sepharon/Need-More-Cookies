@@ -89,6 +89,25 @@ public class Login extends AppCompatActivity implements
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
 
+        if (!is_network_available()){
+            final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle(R.string.offline_alert);
+            alert.setMessage(R.string.offline_question);
+            alert.setPositiveButton(android.R.string.yes,new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialog,int which){
+                    usr_inf.setOffline_mode(true);
+                    launch_next_activity();
+                }
+            });
+            alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            alert.show();
+        }
+
     }
 
     // Called after onCreate, checks if there is internet connection, if not asks the user if
@@ -112,8 +131,8 @@ public class Login extends AppCompatActivity implements
 
                 }
             });
-        }
-        else {
+            alert.show();
+        }else {
             //Check if the user has signed in before
             OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
             if (opr.isDone()) {
@@ -142,7 +161,24 @@ public class Login extends AppCompatActivity implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (!is_network_available()){
+            final AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle(R.string.offline_alert);
+            alert.setMessage(R.string.offline_question);
+            alert.setPositiveButton(android.R.string.yes,new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialog,int which){
+                    usr_inf.setOffline_mode(true);
+                    launch_next_activity();
+                }
+            });
+            alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
+                }
+            });
+            alert.show();
+        }
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -258,33 +294,10 @@ public class Login extends AppCompatActivity implements
         Log.v(TAG,"Launching next activity");
         // Start next activity
         Log.v(TAG,is_network_available()+"");
-        if (!is_network_available()) {
-            Log.v(TAG,"Network1");
-            final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setTitle(R.string.offline_alert);
-            alert.setMessage(R.string.offline_question);
-            alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    usr_inf.setOffline_mode(true);
-                    startActivity(intent);
-                    // Finish current activity
-                    finish();
-                }
-            });
-            alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+        startActivity(intent);
+        // Finish current activity
+        finish();
 
-                }
-            });
-            alert.show();
-        }
-        else {
-            usr_inf.setOffline_mode(false);
-            startActivity(intent);
-            // Finish current activity
-            finish();
-        }
     }
 
     /**

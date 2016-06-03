@@ -88,26 +88,6 @@ public class Login extends AppCompatActivity implements
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
-
-        if (!is_network_available()){
-            final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setTitle(R.string.offline_alert);
-            alert.setMessage(R.string.offline_question);
-            alert.setPositiveButton(android.R.string.yes,new DialogInterface.OnClickListener(){
-                public void onClick(DialogInterface dialog,int which){
-                    usr_inf.setOffline_mode(true);
-                    launch_next_activity();
-                }
-            });
-            alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-
-                }
-            });
-            alert.show();
-        }
-
     }
 
     // Called after onCreate, checks if there is internet connection, if not asks the user if
@@ -116,6 +96,7 @@ public class Login extends AppCompatActivity implements
     public void onStart() {
         super.onStart();
         if (!is_network_available()){
+            Log.v(TAG,"No network 1");
             final AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setTitle(R.string.offline_alert);
             alert.setMessage(R.string.offline_question);
@@ -161,24 +142,7 @@ public class Login extends AppCompatActivity implements
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (!is_network_available()){
-            final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setTitle(R.string.offline_alert);
-            alert.setMessage(R.string.offline_question);
-            alert.setPositiveButton(android.R.string.yes,new DialogInterface.OnClickListener(){
-                public void onClick(DialogInterface dialog,int which){
-                    usr_inf.setOffline_mode(true);
-                    launch_next_activity();
-                }
-            });
-            alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
 
-                }
-            });
-            alert.show();
-        }
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -190,24 +154,7 @@ public class Login extends AppCompatActivity implements
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         // If there is no connection ask the user if he wants to enter offline mode
-        if (!is_network_available()){
-            final AlertDialog.Builder alert = new AlertDialog.Builder(this);
-            alert.setTitle(R.string.offline_alert);
-            alert.setMessage(R.string.offline_question);
-            alert.setPositiveButton(android.R.string.yes,new DialogInterface.OnClickListener(){
-                public void onClick(DialogInterface dialog,int which){
-                    usr_inf.setOffline_mode(true);
-                    launch_next_activity();
-                }
-            });
-            alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
 
-                }
-            });
-            alert.show();
-        }
         // If it was successful go the next activity
         if (result.isSuccess()) {
             // acct stores data from the user (email,name...)

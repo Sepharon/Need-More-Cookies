@@ -65,11 +65,10 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Item item = item_lists.get(position);
-        Log.v(TAG,"Item name: " + item.getItem_Name());
-        Log.v(TAG,"Item quantity: " + item.getItem_Quantity());
+        String currency_price = item.getItem_Price() + " " +User_Info.getInstance().getCurrency();
         holder.product_name.setText(item.getItem_Name());
         holder.product_quantity.setText(item.getItem_Quantity());
-        holder.product_price.setText(item.getItem_Price());
+        holder.product_price.setText(currency_price);
         holder.added_by.setText(item.getAdded_by());
 
     }

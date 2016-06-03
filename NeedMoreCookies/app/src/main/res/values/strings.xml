@@ -173,7 +173,8 @@
     <string name="price_string">Price</string>
     <string name="share_nav">Share</string>
     <string name="welcome_display">"\n\nWelcome back\n "</string>
+
+    <!-- Item -->
     <string name="last_mod_by">Last modification by: %1$s</string>
     <string name="item_deleted">Deleted Item</string>
-
 </resources>

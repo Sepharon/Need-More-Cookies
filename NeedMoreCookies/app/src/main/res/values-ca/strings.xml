@@ -34,7 +34,6 @@
     <string name="external_name_change">El nom de una llista de la compra ha sigut actualitzat.</string>
     <string name="go_online_question">Vols reiniciar l\'app per anar al mode en línia? </string>
     <string name="go_online_alert">Connexió restablerta.</string>
-    <string name="hint_list_name">Nom de la llista de la compra aquí</string>
     <string name="home">Inici</string>
     <string name="invite_friends">Convidar amics</string>
     <string name="lastUpdated">Últim cop actualitzat</string>
@@ -133,4 +132,5 @@
     <string name="select_element">Selecciona un element primer</string>
     <string name="last_mod_by">Última modificació per: %1s</string>
     <string name="item_deleted">Producte eliminat</string>
+    <string name="hint_list_name">Nom de la llista de la compra</string>
 </resources>

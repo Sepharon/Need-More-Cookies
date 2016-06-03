@@ -66,9 +66,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -374,6 +376,9 @@ public class MainActivity extends AppCompatActivity
         /**[START User_Info]**/
         //Get User info
         usr_inf = User_Info.getInstance();
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        usr_inf.setCurrency(sharedPref.getString("currency_list", Currency.getInstance(Locale.getDefault()).getSymbol()));
+        Log.v(TAG,"Currency: " + usr_inf.getCurrency());
         /**[END User_Info]**/
 
         /** [START Advertisements] **/

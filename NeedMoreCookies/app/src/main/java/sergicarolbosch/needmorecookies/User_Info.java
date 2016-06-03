@@ -1,5 +1,8 @@
 package sergicarolbosch.needmorecookies;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 /**
  * This class contains information about the user and the current session
  */

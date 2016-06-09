@@ -13,14 +13,14 @@ The following classes are part of the UI logic layer:
 - Items: The Items class works more or less the same as the MainActivity class, but it does not do as much work as it.
 - MyRecyclerAdapter : The aim of this class is to carry all the logic of the Recycler adapter UI element, as well as the card view elements.
 - ItemRecyclerAdapter : Same aim as the class before but for the items UI.
--
+
 The following classes are part of the Business logic:
 
 - User_Info : This class stores data about the current user session.
 - Shopping_List : This class contains the Shopping Lists objects.
 - Item: This class contains the Items objects.
 - DB_Helper: This class acts as a High-Level interface for the SQL database
-- 
+
 The following classes are part of the low-level logic:
 - SQLiteDB: This class interacts with the SQL database.
 - Update_Android: This class contains a service which is used to establish communication with the server in order to update the contents of the application.
